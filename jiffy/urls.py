@@ -16,5 +16,5 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
     # Default landing page for user
-    url(r'^$', 'engine.views.home', name='Home'),
+    url(r'^$', 'modules.engine.views.home', name='Home'),
 )
