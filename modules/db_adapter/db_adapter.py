@@ -22,11 +22,12 @@ class DBAdapter:
             new_user = User(email=data.get("email")[0], 
             name =data.get("name")[0],
             phone = data.get("phone")[0],
-            user_type = int(data_get("type")[0]))
-
+            user_type = int(data.get("type")[0]))
+            new_user.save()
             return new_user 
 
         except Exception as e:
+            print str(e)
             return None
 
     '''def get_referral_by_id(self, ref_id):

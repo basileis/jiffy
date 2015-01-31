@@ -19,25 +19,37 @@ def home(request):
 def sign_up_user(request):
     """Sign up the new user. This will also send the email to
      admins for each new registration"""
-    #params = request.GET
     data = request.DATA
     db_adapter = DBAdapter()
-    user_existing = db_adapter.get_user(data.get('email'), data.get('phone'))
-    if user_existing is None:
-        try:
-            db_adapter.create_user(dict(data))
-            result = dict(success=True)
-            return HttpResponse(json.dumps(result))
-        except:
+    try:
+        user_existing = db_adapter.get_user(data.get('email'), data.get('phone'))
+        if user_existing is None:
+            new_user = db_adapter.create_user(dict(data)):
+            if new_user:
+		        print 'New User Created :) [ID: %s]'%(new_user.id) 
+		        result = dict(success=True)
+		        return HttpResponse(json.dumps(result))
+            else:
+		        print 'User creation Failed!'
+        else:
             result = dict(success=False)
             return HttpResponse(json.dumps(result))
-        '''referral_id = params.get('referral_id')
-        referral = db_adapter.get_referral_by_id(referral_id)
-        if referral is not None:
-            db_adapter.update_referral(ref_id=referral_id, status=1)'''
-    else:
+    except Exception as e:
+        print str(e)
         result = dict(success=False)
         return HttpResponse(json.dumps(result))
+
+@api_view(['GET'])
+def users_list(request):
+    """Return the list of all the users"""
+    db_adapter = DBAdapter()
+    user_list = db_adapter.get_users_list()
+    data = ''
+    for index in user_list:
+        name = index.name
+        email = index.email
+        data = '%s</b><h1><p>name %s email = %s</p></h1>'%(data, name, email)
+    return HttpResponse(data)
 
 '''
 #@api_view(['POST'])
@@ -66,14 +78,3 @@ def send_invite(request):
     return HttpResponse("<h1>The request has been sent to your friends... :) </h2></br><h2>Enjouy your referral bonus!!</h2>")
 '''
 
-@api_view(['GET'])
-def users_list(request):
-    """Return the list of all the users"""
-    db_adapter = DBAdapter()
-    user_list = db_adapter.get_users_list()
-    data = ''
-    for index in user_list:
-        name = index.name
-        email = index.email
-        data = '%s</b><h1><p>name %s email = %s</p></h1>'%(data, name, email)
-    return HttpResponse(data)
