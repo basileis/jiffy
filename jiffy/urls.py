@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from modules.engine import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -16,5 +17,7 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
     # Default landing page for user
-    url(r'^$', 'modules.engine.views.home', name='Home'),
+    url(r'^$', views.home),
+    url(r'^users', views.users_list),
+    url(r'^signup', views.sign_up_user),
 )

@@ -82,6 +82,11 @@
     background: none;
     z-index: 2;
 }
+
+.modal-dialog{
+    width: 350px;
+
+}
 @media screen and (max-width: 767px) {
     .navbar-default{
         background: #e2673a;
