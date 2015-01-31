@@ -1,2 +1,2 @@
 # jiffy
-Jiffy test
+Jiffy testing
