@@ -31,8 +31,8 @@ def sign_up_user(request):
                 print 'New User Created :) [ID: %s]'%(new_user.id) 
                 result = dict(success=True)
                 try:
-                    send_email.send_email(new_user.email, "<h1>Welcome!</h2></br><h2>Thanks Mr. %s for joining us. We will reaach to you soon! <h2>"%(user.name))
-                    send_email.send_email('bhupeshpant19jan@gmail.com', "<h1>Congrats!</h1></br><h2>New user Added! [%s]</h2>"%(user.name))
+                    send_email.send_email(new_user.email, "<h1>Welcome!</h2></br><h2>Thanks Mr. %s for joining us. We will reaach to you soon! <h2>"%(new_user.name))
+                    send_email.send_email('bhupeshpant19jan@gmail.com',"<h1>Congrats!</h1></br><h2>New user Added! [%s]</h2>"%(new_user.name))
                 except Exception as e:
                     print str(e)
                     print 'email cannot be sent!'
