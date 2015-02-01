@@ -4,7 +4,7 @@ JIFFY_SUPPORT_EMAIL = ''
 JIFFY_SUPPORT_EMAIL_PWD = ''
 JIFFY_WEBSITE = ""
 
-PRELAUNCH_SERVER_LOGS = 'D:/jiffy.log'
+PRELAUNCH_SERVER_LOGS = '/var/www/jiffy/jiffy.log'
 LOG_LEVEL = logs.DEBUG
 
 root_logger = logs.getLogger()
