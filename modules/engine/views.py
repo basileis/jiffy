@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from modules.db_adapter.db_adapter import DBAdapter
 from rest_framework.decorators import api_view
+from modules.utils import send_email
+
 
 # Default Landing Page loader for Jiffy
 @api_view(['GET'])
@@ -24,14 +26,21 @@ def sign_up_user(request):
     try:
         user_existing = db_adapter.get_user(data.get('email'), data.get('phone'))
         if user_existing is None:
-            new_user = db_adapter.create_user(dict(data)):
+            new_user = db_adapter.create_user(dict(data))
             if new_user:
-		        print 'New User Created :) [ID: %s]'%(new_user.id) 
-		        result = dict(success=True)
-		        return HttpResponse(json.dumps(result))
+                print 'New User Created :) [ID: %s]'%(new_user.id) 
+                result = dict(success=True)
+                try:
+                    send_email.send_email(new_user.email, "<h1>Welcome!</h2></br><h2>Thanks Mr. %s for joining us. We will reaach to you soon! <h2>"%(user.name))
+                    send_email.send_email('bhupeshpant19jan@gmail.com', "<h1>Congrats!</h1></br><h2>New user Added! [%s]</h2>"%(user.name))
+                except Exception as e:
+                    print str(e)
+                    print 'email cannot be sent!'
+                return HttpResponse(json.dumps(result))
             else:
-		        print 'User creation Failed!'
+                print 'User creation Failed!'
         else:
+            print 'User Already Exists !'
             result = dict(success=False)
             return HttpResponse(json.dumps(result))
     except Exception as e:
