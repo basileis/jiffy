@@ -1,6 +1,5 @@
 import smtplib
 
-
 def send_email(reciever, content):
     JIFFY_SUPPORT_EMAIL = 'bpant@jiffynow.in'
     JIFFY_SUPPORT_PWD = 'bhanu123'
@@ -8,9 +7,10 @@ def send_email(reciever, content):
     smtpserver = smtplib.SMTP_SSL("smtp.zoho.com",465)
     smtpserver.ehlo()
     smtpserver.ehlo() # extra characters to permit edit
-    smtpserver.login(user, pwd)
-    header = ('To: %s \n From: %s \n Subject: New Registration! \n'%(reciever,
-    JIFFY_NAME))
+    smtpserver.login(JIFFY_SUPPORT_EMAIL, JIFFY_SUPPORT_PWD)
+    header = ('To:%s\nFrom: %s\nSubject:New Registration\n\n'%(reciever,
+    JIFFY_SUPPORT_EMAIL))
     msg = header + content
-    smtpserver.sendmail(user, reciever, msg)
+    smtpserver.sendmail(JIFFY_SUPPORT_EMAIL, reciever, msg)
     smtpserver.close()
+
