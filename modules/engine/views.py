@@ -7,11 +7,14 @@ from django.shortcuts import render
 from modules.db_adapter.db_adapter import DBAdapter
 from rest_framework.decorators import api_view
 from modules.utils import send_email
-
+from modules.utils.config import logs
+from modules.utils.config import JIFFY_SUPPORT_EMAIL
+from modules.utils.jiffy_user_info import JiffyUser
 
 # Default Landing Page loader for Jiffy
 @api_view(['GET'])
 def home(request):
+    logs.info('/home/')
     templ = get_template('index.html')
     html = templ.render(Context())
     return HttpResponse(html)
@@ -21,29 +24,40 @@ def home(request):
 def sign_up_user(request):
     """Sign up the new user. This will also send the email to
      admins for each new registration"""
-    data = request.DATA
+    logs.info('/signup/ endpoint is called!')
+    try:
+        user = JiffyUser(request.DATA)
+    except Exception as e:
+        logs.warning("Could not create the user!. The inputs are invalid")
+        result = dict(success=False)
+        return HttpResponse(json.dumps(result))
     db_adapter = DBAdapter()
     try:
-        user_existing = db_adapter.get_user(data.get('email'), data.get('phone'))
-        if user_existing is None:
-            new_user = db_adapter.create_user(dict(data))
+        new_user = db_adapter.get_user(user.email, user.phone)
+        if new_user is None:
+            new_user = db_adapter.create_user(user)
             if new_user:
-                print 'New User Created :) [ID: %s]'%(new_user.id) 
+                logs.info('New User Created :) [ID: %s]'%(new_user.id))
                 result = dict(success=True)
                 try:
-                    send_email.send_email(new_user.email, "<h1>Welcome!</h2></br><h2>Thanks Mr. %s for joining us. We will reaach to you soon! <h2>"%(new_user.name))
-                    send_email.send_email('bhupeshpant19jan@gmail.com',"<h1>Congrats!</h1></br><h2>New user Added! [%s]</h2>"%(new_user.name))
+                    logs.info('sending email to New User: [%s]'%user.name)
+                    send_email.send_welcome_email(user)
+                    send_email.send_info_to_admin(user)
                 except Exception as e:
-                    print str(e)
-                    print 'email cannot be sent!'
+                    logs.warning('Email cannot be sent. Error info: %s'%str(e))
                 return HttpResponse(json.dumps(result))
             else:
-                print 'User creation Failed!'
+                logs.warning('User registraction failed!')
+                result = dict(success=False)
+                return HttpResponse(json.dumps(result))
         else:
-            print 'User Already Exists !'
+            logs.warning(
+                'User registraction failed. User Already Exists! [Details: name = %s, email = %s]'
+                %(user.name, user.email))
             result = dict(success=False)
             return HttpResponse(json.dumps(result))
     except Exception as e:
+        logs.warning('New Account for %s is not created. [Details: %s]'%(user.name, str(e)))
         print str(e)
         result = dict(success=False)
         return HttpResponse(json.dumps(result))

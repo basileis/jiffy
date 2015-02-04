@@ -1,8 +1,12 @@
 import logging as logs
 
-JIFFY_SUPPORT_EMAIL = ''
-JIFFY_SUPPORT_EMAIL_PWD = ''
+JIFFY_SUPPORT_EMAIL = "bpant@jiffynow.in"
+JIFFY_SUPPORT_EMAIL_PWD = "bhanu123"
 JIFFY_WEBSITE = ""
+JIFFY_EMAIL_SERVER = "smtp.zoho.com"
+JIFFY_EMAIL_PORT = 465
+JIFFY_SUPPORT_TEAM_1 = 'bpant@jiffynow.in'
+JIFFY_SUPPORT_TEAM_2 = 'sjoram@jiffynow.in'
 
 PRELAUNCH_SERVER_LOGS = '/var/www/jiffy/jiffy.log'
 LOG_LEVEL = logs.DEBUG
