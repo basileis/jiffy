@@ -25,11 +25,13 @@ def send_email(reciever, content):
 
 def send_welcome_email(user):
     """Send welcome/email confirmation email to the new registered user"""
+    logs.info("Sending welcome email to new user!")
     welcome_email_content = "Welcome!\n Thanks Mr. %s for joining us. We will reach to you soon!"%user.name
     send_email.send_email(user.email, welcome_email_content)
 
 def send_info_to_admin(user):
     """Send email to zoho support team about the new registration"""
+    logs.info("Sending new user information to Admin!")
     content = "Congrats a new user is registered!\n Details:- \nName: %s \n Email: %s \n Contact No.: %s\n Location:%s"\
                %(user.name, user.email, user.phone, user.location)
     send_email.send_email(config.JIFFY_SUPPORT_TEAM_1, content)
