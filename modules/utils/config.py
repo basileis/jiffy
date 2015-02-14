@@ -12,7 +12,7 @@ PRELAUNCH_SERVER_LOGS = '/var/www/jiffy/jiffy.log'
 LOG_LEVEL = logs.DEBUG
 
 root_logger = logs.getLogger()
-logs.basicConfig(format='%(levelname)s****%(module)s_%(funcName)s*** %(message)s',
+logs.basicConfig(format='%(levelname)s [****%(module)s_%(funcName)s***] %(message)s',
                 level=LOG_LEVEL,
                 filename=PRELAUNCH_SERVER_LOGS,
                 filemode='a+')

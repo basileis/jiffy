@@ -8,7 +8,6 @@ from modules.db_adapter.db_adapter import DBAdapter
 from rest_framework.decorators import api_view
 from modules.utils import send_email
 from modules.utils.config import logs
-from modules.utils.config import JIFFY_SUPPORT_EMAIL
 from modules.utils.jiffy_user_info import JiffyUser
 
 # Default Landing Page loader for Jiffy
@@ -31,10 +30,10 @@ def sign_up_user(request):
         logs.warning("Could not create the user!. The inputs are invalid")
         result = dict(success=False)
         return HttpResponse(json.dumps(result))
+
     db_adapter = DBAdapter()
     try:
-        new_user = db_adapter.get_user(user.email, user.phone)
-        if new_user is None:
+        if not db_adapter.user_exist(user.email, user.phone):
             new_user = db_adapter.create_user(user)
             if new_user:
                 logs.info('New User Created :) [ID: %s]'%(new_user.id))

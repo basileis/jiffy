@@ -31,7 +31,8 @@
 		  var name = document.getElementById("name").value;
 		  var phone = document.getElementById("phone").value;
 		  var email = document.getElementById("email").value;
-		  var type;
+		  var location = document.getElementById("location").value;
+          var type;
 		
 			if (document.getElementById('owner').checked){
 			type = 1;
@@ -63,6 +64,8 @@
 			data += "&email="+email;
 			data += "&phone="+phone;
 			data += "&type="+type;
+            data += "&location="+location;
+
 			xmlhttp.send(data);
 	  };
 	  </script>
