@@ -13,7 +13,7 @@ def send_email(reciever, content):
         smtpserver.ehlo() # extra characters to permit edit
         smtpserver.login(config.JIFFY_SUPPORT_EMAIL,
         config.JIFFY_SUPPORT_EMAIL_PWD)
-        header = ('To:%s\nFrom: %s\nSubject:New Registration\n\n'%(reciever,
+        header = ('To:%s\nFrom: %s\nSubject:Welcome to Jiffy\n\n'%(reciever,
         config.JIFFY_SUPPORT_EMAIL))
         msg = header + content
         smtpserver.sendmail(config.JIFFY_SUPPORT_EMAIL, reciever, msg)
