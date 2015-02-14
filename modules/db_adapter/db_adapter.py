@@ -8,14 +8,22 @@ class DBAdapter:
         pass
 
     def get_users_list(self):
-       """Get the list of all the registered users in database"""
-       return User.objects.all()
+        """Get the list of all the registered users in database"""
+        return User.objects.all()
+
+    def user_exist(self, email, phone_number):
+        """Check if the user exists"""
+        if self.get_user(email, phone_number):
+            return True
+        else:
+            return False
 
     def get_user(self, email, phone_number):
-        """Check if the user is already registered"""
+        """Get the details of the user based on email id OR phone no"""
         try:
-            return User.objects.using(self.DATABASE).filter(email=email).get() or \
-                        User.objects.using(self.DATABASE).filter(phone=phone_number).get()
+            ##return User.objects.using(self.DATABASE).filter(email=email).get() or \
+            ##           User.objects.using(self.DATABASE).filter(phone=phone_number).get()
+            return  User.objects.filter(email=email) or User.objects.filter(phone=phone_number)
         except Exception as e:
             logs.warning("Exception occured when quering to DB. [Details: %s]"%str(e))
             raise

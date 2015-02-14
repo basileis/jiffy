@@ -9,14 +9,16 @@ class JiffyUser(object):
     name = ''
     phone = ''
     user_type = ''
+    location = ''
 
     def __init__(self, params):
         """Get the user basic info from the httpRequest params"""
         try:
-            self.email = params.get("email")[0]
-            self.name = params.get("name")[0]
-            self.phone = params.get("phone")[0]
-            self.user_type = int(params.get("type")[0])
+            self.email = params.get("email")
+            self.name = params.get("name")
+            self.phone = params.get("phone")
+            self.user_type = int(params.get("type"))
+            self.location = params.get('location')
         except Exception as e:
             logs.warning("Input params are invalid! [Details: %s]"%str(e))
             raise
@@ -26,4 +28,4 @@ class JiffyUser(object):
 
     def validate(self):
         """Write all validations on input values here!"""
-        pass
+        return True
