@@ -18,6 +18,7 @@ class DBAdapter:
         else:
             return False
 
+
     def get_user(self, email, phone_number):
         """Get the details of the user based on email id OR phone no"""
         try:
