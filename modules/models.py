@@ -9,7 +9,7 @@ class User(models.Model):
     description = models.CharField(max_length=640, null=True, blank=True)
     user_type = models.IntegerField(default=-1, null=False, blank=False)
     referral_id = models.CharField(max_length=32, null=True, blank=True)
-    friends_list = models.CharField(max_length=1024, null=True, blank=True)
+    friends_list = models.CharField(max_length=4086, null=True, blank=True)
     contacted = models.BooleanField(default=False)
     answered = models.BooleanField(default=False)
 
