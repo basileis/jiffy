@@ -44,6 +44,17 @@ class DBAdapter:
             logs.warning("Exception occured when quering to DB. [Details: %s]"%str(e))
             raise
 
+    def get_friends_list(self):
+        """Return the complete friend list"""
+        pass
+
+    def update_friends_list(self, data):
+        """Save the friends list in string format to user table"""
+        try:
+            pass
+        except Exception as e:
+            logs.warning("Exception Occurred while saving the friends list. [Details: %s]"%str(e))
+
     '''def get_referral_by_id(self, ref_id):
           return Referral.objects.using(self.DATABASE).filter(referral_id=ref_id).get()
         except Exception as e:
