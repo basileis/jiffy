@@ -1,37 +1,64 @@
 import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from modules.utils import config
+from django.template.loader import get_template
+from django.template import Context
+from django.http import HttpResponse
+from django.shortcuts import render
 
 logs = config.logs
 
-def send_email(reciever, content):
+def send_email_(reciever, subject, body):
     """Send email to the user from JIFFY_SUPPORT_EMAIL"""
     logs.info('Sending email to %s '%reciever)
     try:
-        smtpserver = smtplib.SMTP_SSL(
-            config.JIFFY_EMAIL_SERVER, config.JIFFY_EMAIL_PORT)
-        smtpserver.ehlo()
-        smtpserver.ehlo() # extra characters to permit edit
-        smtpserver.login(config.JIFFY_SUPPORT_EMAIL,
-        config.JIFFY_SUPPORT_EMAIL_PWD)
-        header = ('To:%s\nFrom: %s\nSubject:New Registration\n\n'%(reciever,
-        config.JIFFY_SUPPORT_EMAIL))
-        msg = header + content
-        smtpserver.sendmail(config.JIFFY_SUPPORT_EMAIL, reciever, msg)
-        logs.info('Email has been sent successfully to %s'%reciever)
-        smtpserver.close()
+        MESSAGE = MIMEMultipart('related')
+        MESSAGE['subject'] = subject
+        MESSAGE['To'] = reciever
+        MESSAGE['From'] = config.JIFFY_SUPPORT_EMAIL
+        MESSAGE.preamble = """
+        Your mail reader does not support the report format.
+        Please visit us <a href="http://www.jiffynow.in">online</a>!"""
+
+        HTML_BODY = MIMEText(body, 'html')
+        MESSAGE.attach(HTML_BODY)
+        server = smtplib.SMTP(config.JIFFY_EMAIL_SERVER, config.JIFFY_EMAIL_PORT)
+
+        # Print debugging output when testing
+        if __name__ == "__main__":
+            server.set_debuglevel(1)
+
+        server.ehlo()
+        server.login(config.JIFFY_SUPPORT_EMAIL,config.JIFFY_SUPPORT_EMAIL_PWD)
+        server.sendmail(config.JIFFY_SUPPORT_EMAIL, [reciever], MESSAGE.as_string())
+        server.quit()
     except Exception as e:
         logs.warn('Exception occurred while sending email to:%s. [Desc: %s]'\
                     %(reciever, str(e)))
-        raise 
+        raise
 
 def send_welcome_email(user):
     """Send welcome/email confirmation email to the new registered user"""
     logs.info("Sending welcome email to new user!")
-    welcome_email_content = "Welcome!\n Thanks Mr. %s for joining us. We will reach to you soon!"%user.name
+    templ = get_template('email_invite.html')
+    welcome_email_content = templ.render(Context({'referree_name':user.name}))
     try:
-        send_email(user.email, welcome_email_content)
-    except:
-        logs.error('Welcome email sending FAILED!')
+        send_email_(user.email, 'Welcome to Jiffy!', welcome_email_content)
+    except Exception as e :
+        logs.error('Welcome email sending FAILED! [Details: %s]'% str(e))
+
+def send_confirmation_email(user):
+    """
+    Send confirmation email to user
+    """
+    logs.info("Sending confirmation email to new user!")
+    templ = get_template('confirmation_email.html')
+    confirmation_email_content = templ.render(Context({'name':user.name}))
+    try:
+        send_email_(user.email, 'Welcome to Jiffy!', confirmation_email_content)
+    except Exception as e :
+        logs.error('Welcome email sending FAILED! [Details: %s]'% str(e))
 
 def send_info_to_admin(user):
     """Send email to zoho support team about the new registration"""
@@ -39,7 +66,18 @@ def send_info_to_admin(user):
     content = "Congrats a new user is registered!\n Details:- \nName: %s \n Email: %s \n Contact No.: %s\n Location:%s"\
                %(user.name, user.email, user.phone, user.location)
     try:
-        send_email(config.JIFFY_SUPPORT_TEAM_1, content)
-        send_email(config.JIFFY_SUPPORT_TEAM_2, content)
-    except:
-        logs.error('Info sending to ADMIN Failed!')
+        send_email_(config.JIFFY_SUPPORT_TEAM_1, content, user)
+        send_email_(config.JIFFY_SUPPORT_TEAM_2, content, user)
+    except Exception as e:
+        logs.error('Info sending to ADMIN Failed! [Details: %s]'%str(e))
+
+
+if __name__ == '__main__':
+    from jiffy_user_info import JiffyUser
+    user = JiffyUser()
+    user.email = 'bhanupant19@live.com'
+    user.location = 'wakad'
+    user.phone = '7875486265'
+    user.user_type = 2
+    user.name= 'Bhanupant'
+    send_welcome_email(user)

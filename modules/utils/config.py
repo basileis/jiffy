@@ -8,7 +8,7 @@ JIFFY_EMAIL_PORT = 465
 JIFFY_SUPPORT_TEAM_1 = 'bpant@jiffynow.in'
 JIFFY_SUPPORT_TEAM_2 = 'sjoram@jiffynow.in'
 
-PRELAUNCH_SERVER_LOGS = '/var/www/jiffy/jiffy.log'
+PRELAUNCH_SERVER_LOGS = '/tmp/jiffy.log'
 LOG_LEVEL = logs.DEBUG
 
 root_logger = logs.getLogger()

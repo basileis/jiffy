@@ -98,5 +98,6 @@ def send_invite(request):
     except Exception as e:
         return HttpResponse(str(e))
     return HttpResponse("<h1>The request has been sent to your friends... :) </h2></br><h2>Enjouy your referral bonus!!</h2>")
+            logs.warning("Exception occured when quering to DB. [Details: %s]"%str(e))
 '''
 
