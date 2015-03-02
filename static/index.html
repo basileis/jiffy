@@ -71,6 +71,71 @@
 		data += '"friends":[' + ']}' 	
 		return data;		
 	}
+
+	function allLetter()  
+  {   
+  var uname = document.getElementById("name");  
+  
+  var letters = /^[A-Za-z]+$/;  
+  if(uname.value.match(letters))  
+  {   
+  document.getElementById("email").value.focus();  
+  return true;  
+  }
+  else  
+  {  
+  alert('Name must have alphabet characters only');  
+  uname.focus();  
+  return false;  
+  }  
+  }
+	
+function ValidateEmail()  
+  {  
+  var uemail = document.getElementById("email");  
+  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (uemail.value.search('@')){  
+  if(uemail.value.match(mailformat))  
+  {  
+  document.getElementById("phone").value.focus();  
+  return true;  
+  }  
+  else  
+  {  
+  alert("You have entered an invalid email address!");  
+  uemail.focus();  
+  return false;  
+  }  
+  }  
+  }	
+function ValidatePhone()
+{  
+  var uphone=document.getElementById("phone");
+  var phoneno = /^[1-9][0-9]*$/;
+  if(uphone.value.match(phoneno)){  
+      document.getElementById("location").value.focus();
+      return true;  
+    }  
+	alert("You have entered an invalid phone number!");
+	uphone.focus();  
+	return false;  
+}  	
+	
+	function ValidateLocation()  
+  {   
+  var ulocation = document.getElementById("location");  
+  var letters = /^[A-Za-z]+$/;  
+  if(ulocation.value.match(letters))  
+  {     
+  return true;  
+  }  
+  else  
+  {  
+  alert('Location must have alphabet characters only');  
+  ulocation.focus();  
+  return false;  
+  }  
+  }
 	
 	function auth() {
 		var config = {
@@ -332,12 +397,12 @@ function fetch(token) {
             <div class="row">
                 <div class="col-sm-3 col-sm-offset-3">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="name" placeholder="Full Name">
+                   <input type="text" class="form-control" id="name" placeholder="Full Name" size="50" onblur="allLetter()">
                   </div>
                 </div>
                 <div class="col-sm-3 ">
                     <div class="form-group">
-                        <input type="email" class="form-control" id="email" placeholder="Email ID">
+                        <input type="email" class="form-control" id="email" placeholder="Email ID" size="50" onblur="ValidateEmail()">
                   </div>
                 </div>
            
@@ -353,12 +418,12 @@ function fetch(token) {
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="form-group">
-                        <input type="tel" class="form-control" id="phone" placeholder="Phone Number">
+                        <input type="tel" class="form-control" id="phone" placeholder="Enter 10 Digit Phone Number" onblur="ValidatePhone()">
                     </div>
                 </div>
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="location" placeholder="Preferred Location">
+                        <input type="text" class="form-control" id="location" placeholder="Preferred Location" onblur="ValidateLocation()">
                     </div>
                 </div>
             </div>
