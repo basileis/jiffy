@@ -54,7 +54,7 @@ def send_confirmation_email(user):
     Send confirmation email to user
     """
     logs.info("Sending confirmation email to new user!")
-    templ = get_template('confirmation_email.html')
+    templ = get_template('email_confirmation.html')
     confirmation_email_content = templ.render(Context({'name':user.name}))
     try:
         send_email_(user.email, 'Welcome to Jiffy!', confirmation_email_content)
