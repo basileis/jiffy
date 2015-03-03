@@ -40,7 +40,7 @@ def sign_up_user(request):
                 result = dict(success=True)
                 try:
                     logs.info('sending email to New User: [%s]'%user.name)
-                    send_email.send_welcome_email(user)
+                    send_email.send_confirmation_email(user)
                     send_email.send_info_to_admin(user)
                 except Exception as e:
                     logs.warning('Email cannot be sent. Error info: %s'%str(e))
@@ -73,31 +73,11 @@ def users_list(request):
         data = '%s</b><h1><p>name %s email = %s</p></h1>'%(data, name, email)
     return HttpResponse(data)
 
-'''
-#@api_view(['POST'])
-def send_invite(request):
-    # data = request.DATA
-    # user_name = data.get('username')
-    # password = data.get('password')
-    try:
-        gmail_contacts = ContactsEmail('bhupeshpant19jan@gmail.com', 'mail4bhanu')
-        # gmail_contacts = ContactsEmail(user_name, password)
-        phone_no, emails = gmail_contacts.ListAllContacts()
-        print emails
-        print phone_no
-        emails = ['bhanupant19@live.com']
-        for email in emails:
-            try:
-                ref_id = os.urandom(32).encode('hex')
-                send_email(email, ref_id)
-                db_adaptrer = DBAdapter()
-                #user = db_adapter.get_user(data.get('email'), data.get('phone'))
-                #db_adapter.create_referral(user, ref_id)
-            except Exception as e:
-                pass
-    except Exception as e:
-        return HttpResponse(str(e))
-    return HttpResponse("<h1>The request has been sent to your friends... :) </h2></br><h2>Enjouy your referral bonus!!</h2>")
-            logs.warning("Exception occured when quering to DB. [Details: %s]"%str(e))
-'''
+@api_view(['GET','POST'])
+def sign_up_invite(request):
+    return HttpResponse('<p1>SIGNUPNI got hit</p1>')
 
+@api_view(['POST'])
+def confirm_user(request):
+    """Confirmation of the user to be processed"""
+    pass

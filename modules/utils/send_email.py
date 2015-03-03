@@ -68,8 +68,8 @@ def send_info_to_admin(user):
     content = "Congrats a new user is registered!\n Details:- \nName: %s \n Email: %s \n Contact No.: %s\n Location:%s"\
                %(user.name, user.email, user.phone, user.location)
     try:
-        send_email_(config.JIFFY_SUPPORT_TEAM_1, content, user)
-        send_email_(config.JIFFY_SUPPORT_TEAM_2, content, user)
+        send_email_(config.JIFFY_SUPPORT_TEAM_1, 'New Registration Notification!', content)
+        send_email_(config.JIFFY_SUPPORT_TEAM_2, 'New Registration Notification!', content)
     except Exception as e:
         logs.error('Info sending to ADMIN Failed! [Details: %s]'%str(e))
         raise
@@ -90,7 +90,7 @@ if __name__ == '__main__':
             pass
 
     user = JiffyUser()
-    user.email = 'bpant@jiffynow.in'
+    user.email = 'bhanupant19@live.com'
     user.location = 'wakad'
     user.phone = '7875486265'
     user.user_type = 2
