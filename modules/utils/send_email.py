@@ -23,7 +23,7 @@ def send_email_(reciever, subject, body):
 
         HTML_BODY = MIMEText(body, 'html')
         MESSAGE.attach(HTML_BODY)
-        server = smtplib.SMTP(config.JIFFY_EMAIL_SERVER, config.JIFFY_EMAIL_PORT)
+        server = smtplib.SMTP_SSL(config.JIFFY_EMAIL_SERVER, config.JIFFY_EMAIL_PORT)
 
         # Print debugging output when testing
         if __name__ == "__main__":
@@ -47,6 +47,7 @@ def send_welcome_email(user):
         send_email_(user.email, 'Welcome to Jiffy!', welcome_email_content)
     except Exception as e :
         logs.error('Welcome email sending FAILED! [Details: %s]'% str(e))
+        raise
 
 def send_confirmation_email(user):
     """
@@ -59,6 +60,7 @@ def send_confirmation_email(user):
         send_email_(user.email, 'Welcome to Jiffy!', confirmation_email_content)
     except Exception as e :
         logs.error('Welcome email sending FAILED! [Details: %s]'% str(e))
+        raise
 
 def send_info_to_admin(user):
     """Send email to zoho support team about the new registration"""
@@ -70,12 +72,25 @@ def send_info_to_admin(user):
         send_email_(config.JIFFY_SUPPORT_TEAM_2, content, user)
     except Exception as e:
         logs.error('Info sending to ADMIN Failed! [Details: %s]'%str(e))
-
+        raise
 
 if __name__ == '__main__':
-    from jiffy_user_info import JiffyUser
+    class JiffyUser(object):
+        """
+        This class will contain all the detail of the user,
+        including all the cross table information
+        """
+        email = ''
+        name = ''
+        phone = ''
+        user_type = ''
+        location = ''
+
+        def __init__(self):
+            pass
+
     user = JiffyUser()
-    user.email = 'bhanupant19@live.com'
+    user.email = 'bpant@jiffynow.in'
     user.location = 'wakad'
     user.phone = '7875486265'
     user.user_type = 2
