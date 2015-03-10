@@ -79,7 +79,7 @@
   var letters = /^[A-Za-z]+$/;  
   if(uname.value.match(letters))  
   {   
-  document.getElementById("email").value.focus();  
+  document.getElementById("email").focus();  
   return true;  
   }
   else  
@@ -97,7 +97,7 @@ function ValidateEmail()
   if (uemail.value.search('@')){  
   if(uemail.value.match(mailformat))  
   {  
-  document.getElementById("phone").value.focus();  
+  document.getElementById("phone").focus();  
   return true;  
   }  
   else  
@@ -113,7 +113,7 @@ function ValidatePhone()
   var uphone=document.getElementById("phone");
   var phoneno = /^[1-9][0-9]*$/;
   if(uphone.value.match(phoneno)){  
-      document.getElementById("location").value.focus();
+      document.getElementById("location").focus();
       return true;  
     }  
 	alert("You have entered an invalid phone number!");
@@ -456,7 +456,7 @@ function fetch(token) {
             
         <div class="row">
             <div class="col-sm-12 text-center margin-top20px">
-                <a class="btn-orange"  href="javascript:registerUser();">Jiffy Now</a>
+                <a class="btn-orange"  data-toggle="modal" data-target="#myModal" onclick="registerUser();">Jiffy Now</a>
             </div>
             
             
