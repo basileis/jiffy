@@ -4,8 +4,7 @@ from email.mime.text import MIMEText
 from modules.utils import config
 from django.template.loader import get_template
 from django.template import Context
-from django.http import HttpResponse
-from django.shortcuts import render
+from modules.utils import common
 
 logs = config.logs
 
@@ -24,11 +23,6 @@ def send_email_(reciever, subject, body):
         HTML_BODY = MIMEText(body, 'html')
         MESSAGE.attach(HTML_BODY)
         server = smtplib.SMTP_SSL(config.JIFFY_EMAIL_SERVER, config.JIFFY_EMAIL_PORT)
-
-        # Print debugging output when testing
-        if __name__ == "__main__":
-            server.set_debuglevel(1)
-
         server.ehlo()
         server.login(config.JIFFY_SUPPORT_EMAIL,config.JIFFY_SUPPORT_EMAIL_PWD)
         server.sendmail(config.JIFFY_SUPPORT_EMAIL, [reciever], MESSAGE.as_string())
@@ -55,9 +49,12 @@ def send_confirmation_email(user):
     """
     logs.info("Sending confirmation email to new user!")
     templ = get_template('email_confirmation.html')
-    confirmation_email_content = templ.render(Context({'name':user.name}))
+    hash_val = common.get_sha224_hex_digest('%s%s%s'%(user.name, user.email, user.phone))
+
+    confirmation_url = '%s/confirmUser?%s=True'%(config.JIFFY_WEBSITE, hash_val)
+    confirmation_email_content = templ.render(Context({'name':user.name, 'confirmation_url': confirmation_url}))
     try:
-        send_email_(user.email, 'Welcome to Jiffy!', confirmation_email_content)
+        send_email_(user.email, 'Email Confirmation!', confirmation_email_content)
     except Exception as e :
         logs.error('Welcome email sending FAILED! [Details: %s]'% str(e))
         raise
@@ -90,9 +87,9 @@ if __name__ == '__main__':
             pass
 
     user = JiffyUser()
-    user.email = 'bhanupant19@live.com'
-    user.location = 'wakad'
-    user.phone = '7875486265'
+    user.email = u'shanupant19@live.com'
+    user.location = u'wakad'
+    user.phone = u'7871277217'
     user.user_type = 2
-    user.name= 'Bhanupant'
-    send_welcome_email(user)
+    user.name= u'shanu'
+    send_confirmation_email(user)

@@ -6,18 +6,22 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from modules.db_adapter.db_adapter import DBAdapter
 from rest_framework.decorators import api_view
-from modules.utils import send_email
+from modules.utils import send_email, common
 from modules.utils.config import logs
 from modules.utils.jiffy_user_info import JiffyUser
 
 # Default Landing Page loader for Jiffy
-@api_view(['GET'])
-def home(request):
-    logs.info('/home/')
+
+def open_home_page():
+    """opens the home page of prelaunch"""
     templ = get_template('index.html')
     html = templ.render(Context())
     return HttpResponse(html)
 
+@api_view(['GET'])
+def home(request):
+    logs.info('/home/')
+    return open_home_page()
 
 @api_view(['POST'])
 def sign_up_user(request):
@@ -51,13 +55,12 @@ def sign_up_user(request):
                 return HttpResponse(json.dumps(result))
         else:
             logs.warning(
-                'User registraction failed. User Already Exists! [Details: name = %s, email = %s]'
+                'User Registration Railed. User Already Exists! [Details: name = %s, email = %s]'
                 %(user.name, user.email))
             result = dict(success=False)
             return HttpResponse(json.dumps(result))
     except Exception as e:
         logs.warning('New Account for %s is not created. [Details: %s]'%(user.name, str(e)))
-        print str(e)
         result = dict(success=False)
         return HttpResponse(json.dumps(result))
 
@@ -77,7 +80,27 @@ def users_list(request):
 def sign_up_invite(request):
     return HttpResponse('<p1>SIGNUPNI got hit</p1>')
 
-@api_view(['POST'])
+@api_view(['GET'])
 def confirm_user(request):
     """Confirmation of the user to be processed"""
-    pass
+    db_adapter = DBAdapter()
+    user_validated = False
+    if  len(request.GET.keys()) > 0:
+        user_conf = request.GET.keys()[0]
+    else:
+        result = dict(success=False)
+        return HttpResponse(json.dumps(result))
+    users_list = db_adapter.get_unvalidate_users()
+    for user in users_list:
+        hash_val = common.get_sha224_hex_digest('%s%s%s'%(user.name, user.email, user.phone))
+        if hash_val == user_conf:
+            db_adapter.validate_user(user)
+            logs.debug("User [%s] is validated. [email: %s phone: %s]"%\
+                (user.name, user.email, user.phone))
+            #send_email.send_welcome_email(user)
+            user_validated = True
+    if not user_validated:
+        logs.info("Confirm User request contains invalid hash! No user is matched")
+    #This will open the home page
+
+    return open_home_page()
