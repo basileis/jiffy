@@ -26,6 +26,7 @@ def sign_up_user(request):
     logs.info('/signup/ endpoint is called!')
     try:
         user = JiffyUser(request.DATA)
+        logs.debug('User request came with data.[Name: %s, email: %s, phone: %s]'%(user.name, user.email, user.phone))
     except Exception as e:
         logs.warning("Could not create the user!. The inputs are invalid")
         result = dict(success=False)
@@ -51,7 +52,7 @@ def sign_up_user(request):
                 return HttpResponse(json.dumps(result))
         else:
             logs.warning(
-                'User registraction failed. User Already Exists! [Details: name = %s, email = %s]'
+                'User registration failed. User Already Exists! [Details: name = %s, email = %s]'
                 %(user.name, user.email))
             result = dict(success=False)
             return HttpResponse(json.dumps(result))
