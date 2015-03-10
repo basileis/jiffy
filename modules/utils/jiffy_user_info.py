@@ -18,7 +18,8 @@ class JiffyUser(object):
             self.name = params.get("name")
             self.phone = params.get("phone")
             self.user_type = int(params.get("type"))
-            self.location = params.get('location')
+            #self.location = params.get('location')
+            self.location="pune"
         except Exception as e:
             logs.warning("Input params are invalid! [Details: %s]"%str(e))
             raise
