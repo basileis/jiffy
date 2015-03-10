@@ -211,7 +211,7 @@ function fetch(token) {
 	}
 
 	 
-  function create_user(){
+  function registerUser(){
 	var name = document.getElementById("name").value;
 	var phone = document.getElementById("phone").value;
 	var email = document.getElementById("email").value;
@@ -225,15 +225,17 @@ function fetch(token) {
 	}else if(document.getElementById('both').checked){
 	type = 3 ;
 	}
-
-	var data;
 	data = "name="+name;
 	data += "&email="+email;
 	data += "&phone="+phone;
 	data += "&type="+type;
 	data += "&location="+location;
+	url = '/signup';
+	var posting = $.post( url, data );
 
-	http_post("/signup", data);
+	posting.done(function( data_1 ) {
+	alert(data_1);
+			});
   };
 	  </script>
       <section class="hero">
@@ -454,7 +456,7 @@ function fetch(token) {
             
         <div class="row">
             <div class="col-sm-12 text-center margin-top20px">
-                <a class="btn-orange"  data-toggle="modal" data-target="#myModal">Jiffy Now</a>
+                <a class="btn-orange"  href="javascript:registerUser();">Jiffy Now</a>
             </div>
             
             
