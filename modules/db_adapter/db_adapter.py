@@ -54,6 +54,22 @@ class DBAdapter:
         except Exception as e:
             logs.warning("Exception Occurred while saving the friends list. [Details: %s]"%str(e))
 
+
+    def get_unvalidate_users(self):
+        """Return the record set that will contains all the unvalidated user"""
+        try:
+            return User.objects.filter(validated=0)
+        except Exception as e:
+            logs.warning("Exception occurred while retrieving the unvalidated user list")
+
+    def validate_user(self, user):
+        """Validate the user"""
+        user.validated = 1
+        try:
+            user.save()
+        except Exception as e:
+            logs.warning("Unknown exception occurred! details: %s"%str(e))
+
     '''def get_referral_by_id(self, ref_id):
           return Referral.objects.using(self.DATABASE).filter(referral_id=ref_id).get()
         except Exception as e:
