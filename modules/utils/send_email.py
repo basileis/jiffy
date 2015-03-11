@@ -52,6 +52,8 @@ def send_confirmation_email(user):
     hash_val = common.get_sha224_hex_digest('%s%s%s'%(user.name, user.email, user.phone))
 
     confirmation_url = '%s/confirmUser?%s=True'%(config.JIFFY_WEBSITE, hash_val)
+    logs.debug('The confirmation email is sent to user. [Details: Name: %s, Confirmation Link: %s ]'\
+    %(user.name, confirmation_url))
     confirmation_email_content = templ.render(Context({'name':user.name, 'confirmation_url': confirmation_url}))
     try:
         send_email_(user.email, 'Email Confirmation!', confirmation_email_content)
