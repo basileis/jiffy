@@ -30,6 +30,7 @@ def sign_up_user(request):
     logs.info('/signup/ endpoint is called!')
     try:
         user = JiffyUser(request.DATA)
+        logs.debug('User request came with data.[Name: %s, email: %s, phone: %s]'%(user.name, user.email, user.phone))
     except Exception as e:
         logs.warning("Could not create the user!. The inputs are invalid")
         result = dict(success=False)
