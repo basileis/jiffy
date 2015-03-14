@@ -8,16 +8,21 @@
     <title>JiffyNow</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    
       <link rel="stylesheet" href="css/bootstrap.css" >
+      <link rel="stylesheet" href="css/basic-template.css">
+      <link rel="stylesheet" href="css/bootstrapValidator.css">
       <link rel="stylesheet" href="css/bootstrap-overwrite.css" >
       <link rel="stylesheet" href="css/custom.css" >
       <link rel="stylesheet" href="css/font.css" >
       <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> 
 		  
 	<script src="https://apis.google.com/js/client.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <script src="js/bootstrapValidator.js"></script>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -72,70 +77,107 @@
 		return data;		
 	}
 
-	function allLetter()  
-  {   
-  var uname = document.getElementById("name");  
-  
-  var letters = /^[A-Za-z]+$/;  
-  if(uname.value.match(letters))  
-  {   
-  document.getElementById("email").focus();  
-  return true;  
-  }
-  else  
-  {  
-  alert('Name must have alphabet characters only');  
-  uname.focus();  
-  return false;  
-  }  
-  }
+	function isNumberKey(evt){
+   var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}    
+</script>
+      
+      
+<script type="text/javascript">
+	$(document).ready(function () {
+		var validator = $("#registration-form").bootstrapValidator({
+			feedbackIcons: {
+				valid: "glyphicon glyphicon-ok",
+				invalid: "glyphicon glyphicon-remove", 
+				validating: "glyphicon glyphicon-refresh"
+			}, 
+			fields : {
+				email :{
+					message : "Email address is required",
+					validators : {
+						notEmpty : {
+							message : "Please provide an email address"
+						}, 
+
+						emailAddress: {
+							message: "Email address was invalid"
+						}
+					}
+				}, 
+                
+				FullName :{
+					message : "full name is required",
+					validators : {
+						notEmpty : {
+							message : "Please enter your full name"
+						}, 
+
+						name: {
+							message: "full name was invalid"
+						},
+						regexp: {
+                            regexp: '^[a-zA-Z_ ]*$',
+                            message: "Full Name should not be numeric"
+                        }
+					}
+				},
+                
+				PhoneNumber :{
+					message : "Phone number is required",
+					validators : {
+						notEmpty : {
+							message : "Please enter your phone number"
+						}, 
+                        
+                      stringLength: {
+							min : 10, 
+							max: 10,
+							message: "Phone number must be 10 characters long"
+						},
+
+						Number: {
+							message: "Phone number was invalid"
+						},
+						regexp: {
+                            regexp: '^[1-9][0-9]*$',
+                            message: "Phone No. should not start with 0"
+                        }
+						
+					}
+				},
+                
+				PreferredLocation :{
+					message : "Location is required",
+					validators : {
+						notEmpty : {
+							message : "Please enter your Preferred Location"
+						}, 
+                        
+
+						location: {
+							message: "location was invalid"
+						},
+						regexp: {
+                            regexp: '^[a-zA-Z_ ]*$',
+                            message: 'Location name should not be numeric'
+                        }
+					}
+				},
+
+
+			}
+		});
 	
-function ValidateEmail()  
-  {  
-  var uemail = document.getElementById("email");  
-  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  if (uemail.value.search('@')){  
-  if(uemail.value.match(mailformat))  
-  {  
-  document.getElementById("phone").focus();  
-  return true;  
-  }  
-  else  
-  {  
-  alert("You have entered an invalid email address!");  
-  uemail.focus();  
-  return false;  
-  }  
-  }  
-  }	
-function ValidatePhone()
-{  
-  var uphone=document.getElementById("phone");
-  var phoneno = /^[1-9][0-9]*$/;
-  if(uphone.value.match(phoneno)){  
-      document.getElementById("location").focus();
-      return true;  
-    }  
-	alert("You have entered an invalid phone number!");
-	uphone.focus();  
-	return false;  
-}  	
-	
-	function ValidateLocation()  
-  {   
-  var ulocation = document.getElementById("location");  
-  var letters = /^[A-Za-z]+$/;  
-  if(ulocation.value.match(letters))  
-  {     
-  return true;  
-  }  
-  else  
-  {  
-  alert('Location must have alphabet characters only');  
-  ulocation.focus();  
-  return false;  
-  }  
-  }
+		validator.on("success.form.bv", function (e) {
+			e.preventDefault();
+			$("#registration-form").addClass("hidden");
+			$("#confirmation").removeClass("hidden");
+		});
+		
+	});
 	
 	function auth() {
 		var config = {
@@ -242,11 +284,11 @@ function fetch(token) {
           <div  class="headerPosition">
       <div class="width100p hide-767">
         <ul class="social-icon margin-top50px">
-        <li> 
-		<a href="https://www.facebook.com/pages/Jiffy/729331573803643" class="facebook-icon" target="_blank"> </a></li>
-		<li> <a href="https://twitter.com/thinkjiffy" class="twitter-icon" target="_blank"> </a></li>
-		<li> <a href="https://plus.google.com/112976258096807027265" class="google-plus-icon" target="_blank"> </a></li>     
-		</ul>
+                        
+        <li> <a href="https://www.facebook.com/pages/Jiffy/729331573803643" class="facebook-icon" target="_blank"> </a></li>
+        <li> <a href="https://twitter.com/thinkjiffy" class="twitter-icon" target="_blank"> </a></li>
+        <li> <a href="https://plus.google.com/112976258096807027265" class="google-plus-icon" target="_blank"> </a></li>     
+    </ul>
 
         </div>
         <header>
@@ -394,17 +436,24 @@ function fetch(token) {
                     <p class=" strong-paragraph">Discover great places to live around you.</p>
                 </div>
             </div>
-            <form  action="http://jiffynow.in"  autocomplete="on" validate id="newUser">
+			<div class="panel-body">
+            <form action="http://jiffynow.in"  autocomplete="on" validate id="registration-form" method="POST">
             <div class="row">
                 <div class="col-sm-3 col-sm-offset-3">
                     <div class="form-group">
-                   <input type="text" class="form-control" id="name" placeholder="Full Name" size="50" onblur="allLetter()">
-                  </div>
+						
+						
+							<input type="text" class="form-control" id="FullName" name="FullName" size="50" placeholder="Full Name" />
+                            
+                        </div>
                 </div>
                 <div class="col-sm-3 ">
                     <div class="form-group">
-                        <input type="email" class="form-control" id="email" placeholder="Email ID" size="50" onblur="ValidateEmail()">
-                  </div>
+						
+						
+							<input type="text" class="form-control" id="email" name="email" size= "50" placeholder="Email address" />
+                            
+                        </div>
                 </div>
            
                 
@@ -419,12 +468,13 @@ function fetch(token) {
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="form-group">
-                        <input type="tel" class="form-control" id="phone" placeholder="Enter 10 Digit Phone Number" onblur="ValidatePhone()">
+                        <input type="text" class="form-control" name="PhoneNumber" onkeypress="return isNumberKey(event)" name="PhoneNumber" sixe="50" placeholder="Phone Number" /> 
+                       
                     </div>
                 </div>
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="location" placeholder="Preferred Location" onblur="ValidateLocation()">
+                         <input type="text" class="form-control" id="PreferredLocation" name="PreferredLocation" size="50" placeholder="Preferred Location" />
                     </div>
                 </div>
             </div>
@@ -452,7 +502,7 @@ function fetch(token) {
                 
             </div>
         </div>
-            
+            </div>
         <div class="row">
             <div class="col-sm-12 text-center margin-top20px">
                 <a class="btn-orange"  data-toggle="modal" data-target="#myModal" onclick="registerUser();">Jiffy Now</a>
@@ -470,7 +520,7 @@ function fetch(token) {
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
                   
                   <div class="modal-logo">
-                      <img src="images/jiffyLogo.png" width="100px">
+                      <img src="images/jiffyLogoOran.png" width="100px">
                       </div>
                 <p class="modal-title padding-bottom0" id="myModalLabel">
                     Want to help your friends 
@@ -532,10 +582,6 @@ function fetch(token) {
         
       
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
        
    
   </body>
