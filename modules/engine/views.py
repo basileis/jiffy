@@ -105,3 +105,26 @@ def confirm_user(request):
     #This will open the home page
 
     return open_home_page()
+
+
+@api_view(['POST'])
+def invite_friends(request):
+    """Invite friends and enjoy the referral bonus"""
+    data = request.DATA.get(u'invite_data')
+    user_data = json.loads(data)
+    user = JiffyUser()
+    user.extract_info(user_data)
+    save_friends_data(user)
+    send_email.send_invite_to_friends(user)
+    db_adapter = DBAdapter()
+    db_adapter.create_referral_id(user)
+
+
+def save_friends_data(user):
+    """Parse the json data"""
+    db_adapter = DBAdapter()
+    db_adapter.save_friends_list(user)
+
+    result = dict(success=True)
+    return HttpResponse(json.dumps(result))
+

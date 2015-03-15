@@ -5,6 +5,7 @@ from modules.utils import config
 from django.template.loader import get_template
 from django.template import Context
 from modules.utils import common
+import json
 
 logs = config.logs
 
@@ -72,6 +73,23 @@ def send_info_to_admin(user):
     except Exception as e:
         logs.error('Info sending to ADMIN Failed! [Details: %s]'%str(e))
         raise
+
+def send_invite_to_friends(user):
+    """Send Invite email to friends"""
+    friends_list = json.loads(user.friends)
+    templ = get_template('email_invite.html')
+    hash_val = common.get_sha224_hex_digest('%s%s%s'%(user.name, user.email, user.phone))
+    confirmation_url = '%s/invited?%s=True'%(config.JIFFY_WEBSITE, hash_val)
+
+    for friend in friends_list:
+        emails = friend.get('emails')
+        for email in emails:
+            try:
+                invite_email = templ.render(Context({'referree_name':user.name, 'referral_hash': confirmation_url}))
+                send_email_(email, 'Invited by %s'%user.name, invite_email)
+            except Exception as e:
+                logs.error('Invite email sending FAILED! [Details: %s]'% str(e))
+                raise
 
 if __name__ == '__main__':
     class JiffyUser(object):

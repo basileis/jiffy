@@ -8,7 +8,7 @@
     <title>JiffyNow</title>
 
     <!-- Bootstrap -->
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
       <link rel="stylesheet" href="css/bootstrap.css" >
       <link rel="stylesheet" href="css/basic-template.css">
       <link rel="stylesheet" href="css/bootstrapValidator.css">
@@ -229,25 +229,33 @@ function fetch(token) {
 					email_list= '';
 					phone_list= '';
 					for(var k=0;k<emails.length;k++) {
-						email_list += emails[k] + ',' ;
+						email_list += '"'+emails[k] + '",' ;
 					}
+                    email_list += email_list.substring(0, email_list.length -1)
 					for(var k=0;k<phone.length;k++) {
-						phone_list += phone[k] + ',';
+						phone_list += '"'+phone[k] + '",';
 					}
-					friend_json_str = '';
+                    phone_list += phone_list.substring(0, phone_list.length -1)
+
+                      friend_json_str = '';
 					friend_json_str += '{"name":"'+name + '",';
-					friend_json_str += '"emails":"'+email_list+'",';
-					friend_json_str += '"phoneNumber":"'+phone_list+'"' ;
+					friend_json_str += '"emails":['+email_list+'],';
+					friend_json_str += '"phoneNumber":['+phone_list+']' ;
 					friend_json_str += '},';
 					friend_list_json_str += friend_json_str;
 				  }
-				  friend_list_json_str += '';
+				  friend_list_json_str = friend_list_json_str.substring(0, friend_list_json_str.length - 1);
 				  
 				var user_data = get_user_data();
 				var len = user_data.length;
 				user_data = user_data.substring(0, len - 2);
 				user_data += friend_list_json_str + ']}';				
-				http_post("/signupni", user_data);
+				data = "invite_data="+ user_data
+                url = '/invite';
+                var posting = $.post( url, data );
+
+                posting.done(function( response_data ) {
+                });
 			}
 		});
 	}
@@ -566,13 +574,10 @@ function fetch(token) {
                 </div>
                 <div class="col-sm-4">
                       <ul class="social-icon">
-                           
+                          
                             <li> <a href="https://www.facebook.com/pages/Jiffy/729331573803643" class="facebook-icon" target="_blank"> </a></li>
                             <li> <a href="https://twitter.com/thinkjiffy" class="twitter-icon" target="_blank"> </a></li>
                             <li> <a href="https://plus.google.com/112976258096807027265" class="google-plus-icon" target="_blank"> </a></li>   
-                          
-                          
-                          
                         </ul>
                 </div>
             </div>

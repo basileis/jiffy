@@ -1,5 +1,6 @@
 from modules.models import User, Referral
 from modules.utils.config import logs
+from modules.utils import common
 
 class DBAdapter:
     DATABASE='default'
@@ -47,10 +48,13 @@ class DBAdapter:
         """Return the complete friend list"""
         pass
 
-    def update_friends_list(self, data):
+    def save_friends_list(self, user):
         """Save the friends list in string format to user table"""
         try:
-            pass
+            db_user = User.objects.filter(email=user.email).get()
+            if db_user:
+                db_user.friends_list = user.friends
+                db_user.save()
         except Exception as e:
             logs.warning("Exception Occurred while saving the friends list. [Details: %s]"%str(e))
 
@@ -68,7 +72,20 @@ class DBAdapter:
         try:
             user.save()
         except Exception as e:
-            logs.warning("Unknown exception occurred! details: %s"%str(e))
+            logs.warning("Unknown exception occurred! [details: %s]"%str(e))
+
+
+    def create_referral_id(self, user):
+        """Create a new referral id and update the referral table"""
+        try:
+            referral_id = common.get_sha224_hex_digest('%s%s%s'%(user.name, user.email, user.phone))
+            db_user = User.objects.filter(email=user.email).get()
+            ref = Referral(user=db_user, referral_id=referral_id)
+            ref.save()
+        except Exception as e:
+            logs.warning("Unknown exception has occurred while creating the referral id. [Details: %s]"\
+                         %str(e))
+
 
     '''def get_referral_by_id(self, ref_id):
           return Referral.objects.using(self.DATABASE).filter(referral_id=ref_id).get()
