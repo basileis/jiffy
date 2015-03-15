@@ -1,593 +1,549 @@
-<!DOCTYPE html>
+<!doctype html>
 {% load staticfiles %}
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>JiffyNow</title>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="generator" content=
+            "HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-      <link rel="stylesheet" href="css/bootstrap.css" >
-      <link rel="stylesheet" href="css/basic-template.css">
-      <link rel="stylesheet" href="css/bootstrapValidator.css">
-      <link rel="stylesheet" href="css/bootstrap-overwrite.css" >
-      <link rel="stylesheet" href="css/custom.css" >
-      <link rel="stylesheet" href="css/font.css" >
-      <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> 
-		  
-	<script src="https://apis.google.com/js/client.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="js/bootstrapValidator.js"></script>
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    <title>JiffyNow</title>
+    <link rel="stylesheet" href=
+            "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" type=
+                  "text/css" />
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="css/basic-template.css" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrapValidator.css" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrap-overwrite.css" type="text/css" />
+    <link rel="stylesheet" href="css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="css/font.css" type="text/css" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+{% load staticfiles %} <!-- Bootstrap -->
+<script src="https://apis.google.com/js/client.js" type="text/javascript">
+</script><script src=
+                         "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type=
+                         "text/javascript">
+</script><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"
+                 type="text/javascript">
+</script><script src="js/bootstrapValidator.js" type="text/javascript">
+</script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
-	<script>
-	
-		function http_post(url, data){
-			var xmlhttp;
-			if (window.XMLHttpRequest)
-			  {// code for IE7+, Firefox, Chrome, Opera, Safari
-			  xmlhttp=new XMLHttpRequest();
-			  }
-			else
-			  {// code for IE6, IE5
-			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			  }
-			xmlhttp.onreadystatechange=function(){
-			  if (xmlhttp.readyState==4 && xmlhttp.status==200){
-			    alert(http.responseText);
-				console.logs("Sending post request!");
-				}
-			}
-			xmlhttp.open("POST", "http://jiffynow.in"+url, true);
-			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			xmlhttp.send(data);
-		}
-	
-	function get_user_data() {
-        var data = '';
-		var name = document.getElementById("name").value;
-		var phone = document.getElementById("phone").value;
-		var email = document.getElementById("email").value;
-		var location = document.getElementById("location").value;
-		var type;
-
-		if (document.getElementById('owner').checked){
-		type = 1;
-		}else if(document.getElementById('tenant').checked){
-		type = 2;
-		}else if(document.getElementById('both').checked){
-		type = 3 ;
-		}
-		data = '{"name":"'+name+'",';
-		data += '"email":"'+email+'",';
-		data += '"phone":"'+phone+'",';
-		data += '"type":"'+type+'",';
-		data += '"location":"'+location+'",';
-		data += '"friends":[' + ']}' 	
-		return data;		
-	}
-
-	function isNumberKey(evt){
-   var charCode = (evt.which) ? evt.which : event.keyCode
-    if (charCode > 31 && (charCode < 48 || charCode > 57))
-        return false;
-    return true;
-}    
-</script>
-      
-      
 <script type="text/javascript">
-	$(document).ready(function () {
-		var validator = $("#registration-form").bootstrapValidator({
-			feedbackIcons: {
-				valid: "glyphicon glyphicon-ok",
-				invalid: "glyphicon glyphicon-remove", 
-				validating: "glyphicon glyphicon-refresh"
-			}, 
-			fields : {
-				email :{
-					message : "Email address is required",
-					validators : {
-						notEmpty : {
-							message : "Please provide an email address"
-						}, 
+    //<![CDATA[
 
-						emailAddress: {
-							message: "Email address was invalid"
-						}
-					}
-				}, 
-                
-				FullName :{
-					message : "full name is required",
-					validators : {
-						notEmpty : {
-							message : "Please enter your full name"
-						}, 
+    function http_post(url, data){
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function(){
+            if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                alert(http.responseText);
+                console.logs("Sending post request!");
+            }
+        }
+        xmlhttp.open("POST", "http://jiffynow.in"+url, true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send(data);
+    }
 
-						name: {
-							message: "full name was invalid"
-						},
-						regexp: {
-                            regexp: '^[a-zA-Z_ ]*$',
-                            message: "Full Name should not be numeric"
-                        }
-					}
-				},
-                
-				PhoneNumber :{
-					message : "Phone number is required",
-					validators : {
-						notEmpty : {
-							message : "Please enter your phone number"
-						}, 
-                        
-                      stringLength: {
-							min : 10, 
-							max: 10,
-							message: "Phone number must be 10 characters long"
-						},
+    function get_user_data() {
+        var data = '';
+        var name = document.getElementById("name").value;
+        var phone = document.getElementById("phone").value;
+        var email = document.getElementById("email").value;
+        var location = document.getElementById("location").value;
+        var type;
 
-						Number: {
-							message: "Phone number was invalid"
-						},
-						regexp: {
-                            regexp: '^[1-9][0-9]*$',
-                            message: "Phone No. should not start with 0"
-                        }
-						
-					}
-				},
-                
-				PreferredLocation :{
-					message : "Location is required",
-					validators : {
-						notEmpty : {
-							message : "Please enter your Preferred Location"
-						}, 
-                        
+        if (document.getElementById('owner').checked){
+            type = 1;
+        }else if(document.getElementById('tenant').checked){
+            type = 2;
+        }else if(document.getElementById('both').checked){
+            type = 3 ;
+        }
+        data = '{"name":"'+name+'",';
+        data += '"email":"'+email+'",';
+        data += '"phone":"'+phone+'",';
+        data += '"type":"'+type+'",';
+        data += '"location":"'+location+'",';
+        data += '"friends":[' + ']}'
+        return data;
+    }
 
-						location: {
-							message: "location was invalid"
-						},
-						regexp: {
-                            regexp: '^[a-zA-Z_ ]*$',
-                            message: 'Location name should not be numeric'
-                        }
-					}
-				},
+    function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+    //]]>
+</script><script type="text/javascript">
+//<![CDATA[
+$(document).ready(function () {
+    var validator = $("#registration-form").bootstrapValidator({
+        feedbackIcons: {
+            valid: "glyphicon glyphicon-ok",
+            invalid: "glyphicon glyphicon-remove",
+            validating: "glyphicon glyphicon-refresh"
+        },
+        fields : {
+            email :{
+                message : "Email address is required",
+                validators : {
+                    notEmpty : {
+                        message : "Please provide an email address"
+                    },
+
+                    emailAddress: {
+                        message: "Email address was invalid"
+                    }
+                }
+            },
+
+            name :{
+                message : "full name is required",
+                validators : {
+                    notEmpty : {
+                        message : "Please enter your full name"
+                    },
+
+                    name: {
+                        message: "full name was invalid"
+                    },
+                    regexp: {
+                        regexp: '^[a-zA-Z_ ]*$',
+                        message: "Full Name should not be numeric"
+                    }
+                }
+            },
+
+            phone :{
+                message : "Phone number is required",
+                validators : {
+                    notEmpty : {
+                        message : "Please enter your phone number"
+                    },
+
+                    stringLength: {
+                        min : 10,
+                        max: 10,
+                        message: "Phone number must be 10 characters long"
+                    },
+
+                    Number: {
+                        message: "Phone number was invalid"
+                    },
+                    regexp: {
+                        regexp: '^[1-9][0-9]*$',
+                        message: "Phone No. should not start with 0"
+                    }
+
+                }
+            },
+
+            location :{
+                message : "Location is required",
+                validators : {
+                    notEmpty : {
+                        message : "Please enter your Preferred Location"
+                    },
 
 
-			}
-		});
-	
-		validator.on("success.form.bv", function (e) {
-			e.preventDefault();
-			$("#registration-form").addClass("hidden");
-			$("#confirmation").removeClass("hidden");
-		});
-		
-	});
-	
-	function auth() {
-		var config = {
-		'client_id': '397136943925-e5osdulomodovq12vdr4b3rcuumclvtk.apps.googleusercontent.com',
-		'scope': 'https://www.google.com/m8/feeds'
-		};
-		gapi.auth.authorize(config, function() {
-		fetch(gapi.auth.getToken());
-		});
-	}
+                    location: {
+                        message: "location was invalid"
+                    },
+                    regexp: {
+                        regexp: '^[a-zA-Z_ ]*$',
+                        message: 'Location name should not be numeric'
+                    }
+                }
+            }
+
+
+        }
+    });
+
+    validator.on("success.form.bv", function (e) {
+        e.preventDefault();
+        $("#registration-form").addClass("hidden");
+        $("#confirmation").removeClass("hidden");
+    });
+
+});
+
+function auth() {
+    var config = {
+        'client_id': '397136943925-e5osdulomodovq12vdr4b3rcuumclvtk.apps.googleusercontent.com',
+        'scope': 'https://www.google.com/m8/feeds'
+    };
+    gapi.auth.authorize(config, function() {
+        fetch(gapi.auth.getToken());
+    });
+}
 function fetch(token) {
-	$.ajax({
-	url: "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + token.access_token  + "&max-results=70000&alt=json" + "&callback=?",
-	dataType: "jsonp",
-	success:function(data) {
-			  contacts = [];
-				for (var i = 0, entry; entry = data.feed.entry[i]; i++) {
-					var contact = {
-					  'name' : entry['title']['$t'],
-					  'id' : entry['id']['$t'],
-					  'emails' : [],
-					  'phoneNumber' : []
-					};
+    $.ajax({
+        url: "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + token.access_token  + "&max-results=70000&alt=json" + "&callback=?",
+        dataType: "jsonp",
+        success:function(data) {
+            contacts = [];
+            for (var i = 0, entry; entry = data.feed.entry[i]; i++) {
+                var contact = {
+                    'name' : entry['title']['$t'],
+                    'id' : entry['id']['$t'],
+                    'emails' : [],
+                    'phoneNumber' : []
+                };
 
-					if (entry['gd$email']) {
-					  var emails = entry['gd$email'];
-					  for (var j = 0, email; email = emails[j]; j++) {
-						contact['emails'].push(email['address']);
-					  }
-					}
-					if (entry['gd$phoneNumber']) {
-					  var phoneNumber = entry['gd$phoneNumber'];
-					  for (var j = 0, phone; phone = phoneNumber[j]; j++) {
-						contact['phoneNumber'].push(phone['$t']);
-					 
-					  }
-					}
-					if (!contact['name']) {
-					  contact['name'] = contact['emails'][0] || "<Unknown>";
-					}
-					contacts.push(contact);
-				  }
-				  numContacts = contacts.length;
-				  friend_list_json_str = '';
-				  for(var j=0;j<numContacts;j++) {
-					name = (contacts[j])['name'];
-					emails = (contacts[j])['emails'];
-					phone = (contacts[j])['phoneNumber'];
-					email_list= '';
-					phone_list= '';
-					for(var k=0;k<emails.length;k++) {
-						email_list += '"'+emails[k] + '",' ;
-					}
-                    email_list += email_list.substring(0, email_list.length -1)
-					for(var k=0;k<phone.length;k++) {
-						phone_list += '"'+phone[k] + '",';
-					}
-                    phone_list += phone_list.substring(0, phone_list.length -1)
+                if (entry['gd$email']) {
+                    var emails = entry['gd$email'];
+                    for (var j = 0, email; email = emails[j]; j++) {
+                        contact['emails'].push(email['address']);
+                    }
+                }
+                if (entry['gd$phoneNumber']) {
+                    var phoneNumber = entry['gd$phoneNumber'];
+                    for (var j = 0, phone; phone = phoneNumber[j]; j++) {
+                        contact['phoneNumber'].push(phone['$t']);
 
-                      friend_json_str = '';
-					friend_json_str += '{"name":"'+name + '",';
-					friend_json_str += '"emails":['+email_list+'],';
-					friend_json_str += '"phoneNumber":['+phone_list+']' ;
-					friend_json_str += '},';
-					friend_list_json_str += friend_json_str;
-				  }
-				  friend_list_json_str = friend_list_json_str.substring(0, friend_list_json_str.length - 1);
-				  
-				var user_data = get_user_data();
-				var len = user_data.length;
-				user_data = user_data.substring(0, len - 2);
-				user_data += friend_list_json_str + ']}';				
-				data = "invite_data="+ user_data
-                url = '/invite';
-                var posting = $.post( url, data );
+                    }
+                }
+                if (!contact['name']) {
+                    contact['name'] = contact['emails'][0] || "<Unknown>";
+                }
+                contacts.push(contact);
+            }
+            numContacts = contacts.length;
+            friend_list_json_str = '';
+            for(var j=0;j<numContacts;j++) {
+                name = (contacts[j])['name'];
+                emails = (contacts[j])['emails'];
+                phone = (contacts[j])['phoneNumber'];
+                email_list= '';
+                phone_list= '';
+                for(var k=0;k<emails.length;k++) {
+                    email_list += '"'+emails[k] + '",' ;
+                }
+                email_list += email_list.substring(0, email_list.length -1)
+                for(var k=0;k<phone.length;k++) {
+                    phone_list += '"'+phone[k] + '",';
+                }
+                phone_list += phone_list.substring(0, phone_list.length -1)
 
-                posting.done(function( response_data ) {
-                });
-			}
-		});
-	}
+                friend_json_str = '';
+                friend_json_str += '{"name":"'+name + '",';
+                friend_json_str += '"emails":['+email_list+'],';
+                friend_json_str += '"phoneNumber":['+phone_list+']' ;
+                friend_json_str += '},';
+                friend_list_json_str += friend_json_str;
+            }
+            friend_list_json_str = friend_list_json_str.substring(0, friend_list_json_str.length - 1);
 
-	 
-  function registerUser(){
-	var name = document.getElementById("name").value;
-	var phone = document.getElementById("phone").value;
-	var email = document.getElementById("email").value;
-	var location = document.getElementById("location").value;
-	var type;
+            var user_data = get_user_data();
+            var len = user_data.length;
+            user_data = user_data.substring(0, len - 2);
+            user_data += friend_list_json_str + ']}';
+            data = "invite_data="+ user_data
+            url = '/invite';
+            var posting = $.post( url, data );
 
-	if (document.getElementById('owner').checked){
-	type = 1;
-	}else if(document.getElementById('tenant').checked){
-	type = 2;
-	}else if(document.getElementById('both').checked){
-	type = 3 ;
-	}
-	data = "name="+name;
-	data += "&email="+email;
-	data += "&phone="+phone;
-	data += "&type="+type;
-	data += "&location="+location;
-	url = '/signup';
-	var posting = $.post( url, data );
+            posting.done(function( response_data ) {
+            });
+        }
+    });
+}
 
-	posting.done(function( data_1 ) {
-			});
-  };
-	  </script>
-      <section class="hero">
-          
-          <div  class="headerPosition">
-      <div class="width100p hide-767">
+
+function registerUser(){
+    var name = document.getElementById("name").value;
+    var phone = document.getElementById("phone").value;
+    var email = document.getElementById("email").value;
+    var location = document.getElementById("location").value;
+    var type;
+
+    if (document.getElementById('owner').checked){
+        type = 1;
+    }else if(document.getElementById('tenant').checked){
+        type = 2;
+    }else if(document.getElementById('both').checked){
+        type = 3 ;
+    }
+    data = "name="+name;
+    data += "&email="+email;
+    data += "&phone="+phone;
+    data += "&type="+type;
+    data += "&location="+location;
+    url = '/signup';
+    var posting = $.post( url, data );
+
+    posting.done(function( data_1 ) {
+    });
+};
+
+</script>
+
+<div class="headerPosition">
+    <div class="width100p hide-767">
         <ul class="social-icon margin-top50px">
-                        
-        <li> <a href="https://www.facebook.com/pages/Jiffy/729331573803643" class="facebook-icon" target="_blank"> </a></li>
-        <li> <a href="https://twitter.com/thinkjiffy" class="twitter-icon" target="_blank"> </a></li>
-        <li> <a href="https://plus.google.com/112976258096807027265" class="google-plus-icon" target="_blank"> </a></li>     
-    </ul>
+            <li><a href="https://www.facebook.com/pages/Jiffy/729331573803643" class=
+                    "facebook-icon" target="_blank"></a></li>
 
-        </div>
-        <header>
-            <nav class="navbar navbar-default" role="navigation">
-              <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" href="#">
-                      <div class="hide-767">
-                  <img src="images/jiffyLogo.png" > 
-                          </div>
-                      <div class="show-767">
-                    <img src="images/jiffyLogo767.png" >
-                          </div>
-                  </a>
-                </div>
+            <li><a href="https://twitter.com/thinkjiffy" class="twitter-icon" target=
+                    "_blank"></a></li>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav">
-                    <li><a href="#">T&C </a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#jiffynow">Sign Up</a></li>
-
-                   
-                  </ul>
-                 
-                  </div><!-- /.navbar-collapse -->
-              </div><!-- /.container-fluid -->
-            </nav>
-        </header>
-              </div>
-          
-      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-   <div class="item itemBg1 active">
-      
-      <div class="carousel-caption">
-      <div class="width100p">
-                        <h1 class="color-white">
-                            Sign up and experience the power of renting
-                            <br>
-                            the right home among millions !
-                        </h1>
-                        <a class="btn-orange margin-top30px" href="#jiffynow">Jiffy Now</a>
-                    </div>
-      </div>
+            <li><a href="https://plus.google.com/112976258096807027265" class=
+                    "google-plus-icon" target="_blank"></a></li>
+        </ul>
     </div>
-    
-      <div class="item itemBg2 ">
-      
-      <div class="carousel-caption">
-      <div class="width100p">
-                        <h1 class="color-white">
-                            Your very own special dream home
-                            <br>
-                            Just like the French Castle of your dreams !
-                        </h1>
-                        <a class="btn-orange margin-top30px" href="#jiffynow">Jiffy Now</a>
-                    </div>
-      </div>
-    </div>
-      
-      <div class="item itemBg3 ">
-      
-      <div class="carousel-caption">
-      <div class="width100p">
-                        <h1 class="color-white">
-                            Complete with romantic balcony,
-                             <br>
-                            Absolutely perfect !
-                        </h1>
-                        <a class="btn-orange margin-top30px" href="#jiffynow">Jiffy Now</a>
-                    </div>
-      </div>
-    </div>
-      
-    
-  </div>
 
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle
+        navigation</span></button> <a class="navbar-brand" href="#"></a>
+
+            <div class="hide-767"><img src="images/jiffyLogo.png" /></div>
+
+            <div class="show-767"><img src="images/jiffyLogo767.png" /></div>
+        </div><!-- Collect the nav links, forms, and other content for toggling -->
+
+        <div class="collapse navbar-collapse navbar-right" id=
+                "bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#">T&amp;C</a></li>
+
+                <li><a href="#">FAQ</a></li>
+
+                <li><a href="#jiffynow">Sign Up</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </div>
-      </section>
-       
-    <section class="about-jiffy-bg" id="about-jiffy">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-5 hide-767">
-                    <img src="images/aboutJiffyImage.png" class="img-responsive margin-top50px">
-                </div>
-                <div class="col-sm-7 ">
-                    <div class="width100p">
-                    <h1 class="color-orange">
-                      Jiffy Prelaunch in Pune
-                    </h1>
-                    </div>
-                    <div class="width100p color-light-gray">
-                    <p>
-                    Jiffy pre-launch registration and invites have started. This
-                    is absolutely right moment to get yourself involved
-                    with jiffy and fulfill all your  immediate or upcoming
-                    renting needs. If you help your friend by introducing
-                    him/her to jiffy and sending an invite , you will have
-                    chance to earn money too.
-                    </p>
-                    <p>
-                    Being a jiffy member you will be able to rent-out/rent-in
-                    your home with ease. Jiffy consists of team of professionals
-                    who know how to help you in finding the right home or tenant
-                    for your home. 
-                    </p>
-                    </div>
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+
+    <ol class="carousel-indicators"></ol><!-- Wrapper for slides -->
+
+    <div class="carousel-inner" role="listbox">
+        <div class="item itemBg1 active">
+            <div class="carousel-caption">
+                <div class="width100p">
+                    <h1 class="color-white">Sign up and experience the power of renting<br />
+                        the right home among millions !</h1><a class="btn-orange margin-top30px"
+                                                               href="#jiffynow">Jiffy Now</a>
                 </div>
             </div>
         </div>
-    </section>
-    
-    <section id="jiffynow" class="now-jiffy-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <h1 class="color-orange">Jiffy Now</h1>
-                    <p class=" strong-paragraph">Discover great places to live around you.</p>
+
+        <div class="item itemBg2">
+            <div class="carousel-caption">
+                <div class="width100p">
+                    <h1 class="color-white">Your very own special dream home<br />
+                        Just like the French Castle of your dreams !</h1><a class=
+                                                                                    "btn-orange margin-top30px" href="#jiffynow">Jiffy Now</a>
                 </div>
             </div>
-			<div class="panel-body">
-            <form action="http://jiffynow.in"  autocomplete="on" validate id="registration-form" method="POST">
+        </div>
+
+        <div class="item itemBg3">
+            <div class="carousel-caption">
+                <div class="width100p">
+                    <h1 class="color-white">Complete with romantic balcony,<br />
+                        Absolutely perfect !</h1><a class="btn-orange margin-top30px" href=
+                        "#jiffynow">Jiffy Now</a>
+                </div>
+            </div>
+        </div>
+    </div><!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button"
+       data-slide="prev"> <span class="sr-only">Previous</span></a> <a class=
+                                                                               "right carousel-control" href="#carousel-example-generic" role="button" data-slide=
+                                                                               "next"> <span class="sr-only">Next</span></a>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5 hide-767"><img src="images/aboutJiffyImage.png" class=
+                "img-responsive margin-top50px" /></div>
+
+        <div class="col-sm-7">
+            <div class="width100p">
+                <h1 class="color-orange">Jiffy Prelaunch in Pune</h1>
+            </div>
+
+            <div class="width100p color-light-gray">
+                <p>Jiffy pre-launch registration and invites have started. This is absolutely
+                    right moment to get yourself involved with jiffy and fulfill all your immediate
+                    or upcoming renting needs. If you help your friend by introducing him/her to
+                    jiffy and sending an invite , you will have chance to earn money too.</p>
+
+                <p>Being a jiffy member you will be able to rent-out/rent-in your home with
+                    ease. Jiffy consists of team of professionals who know how to help you in
+                    finding the right home or tenant for your home.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h1 class="color-orange">Jiffy Now</h1>
+
+            <p class=" strong-paragraph">Discover great places to live around you.</p>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <form action="http://jiffynow.in" autocomplete="on" validate="" id=
+                "registration-form" method="post">
             <div class="row">
                 <div class="col-sm-3 col-sm-offset-3">
                     <div class="form-group">
-						
-						
-							<input type="text" class="form-control" id="FullName" name="FullName" size="50" placeholder="Full Name" />
-                            
-                        </div>
+                        <input type="text" class="form-control" id="name" name="name" size="50"
+                               placeholder="Full Name" />
+                    </div>
                 </div>
-                <div class="col-sm-3 ">
+
+                <div class="col-sm-3">
                     <div class="form-group">
-						
-						
-							<input type="text" class="form-control" id="email" name="email" size= "50" placeholder="Email address" />
-                            
-                        </div>
+                        <input type="text" class="form-control" id="email" name="email" size="50"
+                               placeholder="Email address" />
+                    </div>
                 </div>
-           
-                
             </div>
+
             <div class="row">
                 <div class="col-sm-12 text-center strong-paragraph15">
-                Jiffy respects your privacy and hates SPAM calls just as you do.
-                  <br>  
-                It is important to verify your identity and keeping your account secure.
+                    Jiffy respects your privacy and hates SPAM calls just as you do.<br />
+                    It is important to verify your identity and keeping your account secure.
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="PhoneNumber" onkeypress="return isNumberKey(event)" name="PhoneNumber" sixe="50" placeholder="Phone Number" /> 
-                       
+                        <input type="text" class="form-control" id="phone" onkeypress=
+                                "return isNumberKey(event)" name="phone" sixe="50" placeholder=
+                                       "Phone Number" />
                     </div>
                 </div>
+
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="form-group">
-                         <input type="text" class="form-control" id="PreferredLocation" name="PreferredLocation" size="50" placeholder="Preferred Location" />
+                        <input type="text" class="form-control" id="location" name=
+                                "location" size="50" placeholder="Preferred Location" />
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-sm-12 text-center" id="userType">
-                    <div class="radio" >
-                      <label>
-                        <input type="radio" name="optionsRadios" id="owner" value="1" checked>
-                        <span>Owner</span>
-                      </label>
-                        </div>
                     <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="tenant" value="2" checked>
-                        <span>Tenant</span>
-                      </label>
+                        <label><input type="radio" name="optionRadios" id="owner" value="1"
+                                      checked /> <span>Owner</span></label>
                     </div>
-                    
-                     <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="both" value="3" checked>
-                        <span>Both</span>
-                      </label>
-                    </div>
-                
-            </div>
-        </div>
-            </div>
-        <div class="row">
-            <div class="col-sm-12 text-center margin-top20px">
-                <a class="btn-orange"  data-toggle="modal" data-target="#myModal" onclick="registerUser();">Jiffy Now</a>
-            </div>
-            
-            
-        <!-- Modal -->
- 
-        </div>
-            </form>
-                   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header text-center">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
-                  
-                  <div class="modal-logo">
-                      <img src="images/jiffyLogoOran.png" width="100px">
-                      </div>
-                <p class="modal-title padding-bottom0" id="myModalLabel">
-                    Want to help your friends 
-                    <br>
-                    and Earn Referral Money
-                    <br>
-                    up-to <strong class="color-orange">5000/-</strong>
-                    <br>
-                    Invite them to Jiffy
-                  </p>
-              </div>
-              <div class="modal-body text-center">
-                <button onclick="auth();" type="button" class="btn btn-lg btn-danger" data-dismiss="modal">
-                <img src="images/googlepluse.svg" width="20px">
-                    Invite Google Friends!
-                  </button>
-                  <br>
-                  <!--<button type="button" class="btn btn-lg btn-primary margin-top20px" data-dismiss="modal">
-                       <img src="images/facebook.svg" width="20px">
-                      Import contacts from Facebook!
-                  </button> --> 
-              </div>
-             
-            </div>
-          </div>
-        </div>
-    </section>
-      
-    <footer>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="width100p">
-                        <ul >
-                           
-                            <li> <a href="#"> Home</a></li>
-                            <li> <a href="#"> T&C</a></li>
-                            <li> <a href="#"> FAQ</a></li>
-                            <li> <a href="#jiffynow"> Sign Up </a></li>      
-                        </ul>
-                    </div>
-                    <div class="width100p"><span>(C)2015 Jiffynow .in</span></div>
-                </div>
-                <div class="col-sm-4">
-                      <ul class="social-icon">
-                          
-                            <li> <a href="https://www.facebook.com/pages/Jiffy/729331573803643" class="facebook-icon" target="_blank"> </a></li>
-                            <li> <a href="https://twitter.com/thinkjiffy" class="twitter-icon" target="_blank"> </a></li>
-                            <li> <a href="https://plus.google.com/112976258096807027265" class="google-plus-icon" target="_blank"> </a></li>   
-                        </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-        
-        
-      
 
-       
-   
-  </body>
+                    <div class="radio">
+                        <label><input type="radio" name="optionRadios" id="tenant" value="2"
+                                      checked/> <span>Tenant</span></label>
+                    </div>
+
+                    <div class="radio">
+                        <label><input type="radio" name="optionRadios" id="both" value="3"
+                                      checked/> <span>Both</span></label>
+                    </div>
+                </div>
+            </div>
+    <div class="row">
+        <div class="col-sm-12 text-center margin-top20px">
+            <a class="btn-orange" data-toggle="modal" data-target="#myModal" onclick="registerUser();">Jiffy Now</a>
+        </div><!-- Modal -->
+    </div>
+    </form>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby=
+            "myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden=
+                                                                                           "true">X</span><span class="sr-only">Close</span></button>
+
+                    <div class="modal-logo"><img src="images/jiffyLogoOran.png" width=
+                            "100px" /></div>
+
+                    <p class="modal-title padding-bottom0" id="myModalLabel">Want to help your
+                        friends<br />
+                        and Earn Referral Money<br />
+                        up-to <strong class="color-orange">5000/-</strong><br />
+                        Invite them to Jiffy</p>
+                </div>
+
+                <div class="modal-body text-center">
+                    <button onclick="auth();" type="button" class="btn btn-lg btn-danger"
+                            data-dismiss="modal"><img src="images/googlepluse.svg" width="20px" /> Invite
+                        Google Friends!</button><br />
+                    <!--<button type="button" class="btn btn-lg btn-primary margin-top20px" data-dismiss="modal">
+                               <img src="images/facebook.svg" width="20px">
+                              Import contacts from Facebook!
+                          </button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="width100p">
+                <ul>
+                    <li><a href="#">Home</a></li>
+
+                    <li><a href="#">T&amp;C</a></li>
+
+                    <li><a href="#">FAQ</a></li>
+
+                    <li><a href="#jiffynow">Sign Up</a></li>
+                </ul>
+            </div>
+
+            <div class="width100p">
+                <span>(C)2015 Jiffynow .in</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <ul class="social-icon">
+                <li><a href="https://www.facebook.com/pages/Jiffy/729331573803643" class=
+                        "facebook-icon" target="_blank"></a></li>
+
+                <li><a href="https://twitter.com/thinkjiffy" class="twitter-icon" target=
+                        "_blank"></a></li>
+
+                <li><a href="https://plus.google.com/112976258096807027265" class=
+                        "google-plus-icon" target="_blank"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
 </html>
