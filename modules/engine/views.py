@@ -3,10 +3,9 @@ import json
 from django.template.loader import get_template
 from django.template import Context
 from django.http import HttpResponse
-from django.shortcuts import render
 from modules.db_adapter.db_adapter import DBAdapter
 from rest_framework.decorators import api_view
-from modules.utils import send_email, common
+from modules.utils import send_email, common, config
 from modules.utils.config import logs
 from modules.utils.jiffy_user_info import JiffyUser
 
@@ -110,21 +109,31 @@ def confirm_user(request):
 @api_view(['POST'])
 def invite_friends(request):
     """Invite friends and enjoy the referral bonus"""
-    data = request.DATA.get(u'invite_data')
-    user_data = json.loads(data)
-    user = JiffyUser()
-    user.extract_info(user_data)
-    save_friends_data(user)
-    send_email.send_invite_to_friends(user)
-    db_adapter = DBAdapter()
-    db_adapter.create_referral_id(user)
-
+    try:
+        data = request.DATA.get(u'invite_data')
+        user_data = json.loads(data)
+        user = JiffyUser()
+        user.extract_info(user_data)
+        save_friends_data(user)
+        logs.debug("Friends data is saved!")
+        if config.INVITE_FRIENDS:
+            send_email.send_invite_to_friends(user)
+        db_adapter = DBAdapter()
+        db_adapter.create_referral_id(user)
+        logs.info("Referral id for user:%s is created!"%user.name)
+        result = dict(success=True)
+        return HttpResponse(json.dumps(result))
+    except Exception as e:
+        logs.warning("Exception info: Details: %s"%str(e))
+        result = dict(success=False)
+        return HttpResponse(json.dumps(result))
 
 def save_friends_data(user):
     """Parse the json data"""
     db_adapter = DBAdapter()
     db_adapter.save_friends_list(user)
 
-    result = dict(success=True)
-    return HttpResponse(json.dumps(result))
-
+@api_view(['GET'])
+def invited_friends(request):
+    """Takes the interested people to the home page"""
+    return open_home_page()

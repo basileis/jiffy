@@ -21,7 +21,8 @@ urlpatterns = patterns('',
     url(r'^users', views.users_list),
     url(r'^signup', views.sign_up_user),
     url(r'^confirmUser', views.confirm_user),
-    url(r'^invite', views.invite_friends)
+    url(r'^invite', views.invite_friends),
+    url(r'^invited', views.invited_friends),
 
 
 )
