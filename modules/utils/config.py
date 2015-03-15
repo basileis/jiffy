@@ -7,6 +7,7 @@ JIFFY_EMAIL_SERVER = "smtp.zoho.com"
 JIFFY_EMAIL_PORT = 465
 JIFFY_SUPPORT_TEAM_1 = 'bpant@jiffynow.in'
 JIFFY_SUPPORT_TEAM_2 = 'sjoram@jiffynow.in'
+INVITE_FRIENDS = True
 
 PRELAUNCH_SERVER_LOGS = '/tmp/jiffy.log'
 LOG_LEVEL = logs.DEBUG

@@ -79,7 +79,7 @@ def send_invite_to_friends(user):
     friends_list = json.loads(user.friends)
     templ = get_template('email_invite.html')
     hash_val = common.get_sha224_hex_digest('%s%s%s'%(user.name, user.email, user.phone))
-    confirmation_url = '%s/invited?%s=True'%(config.JIFFY_WEBSITE, hash_val)
+    confirmation_url = '%s/referral?%s=True'%(config.JIFFY_WEBSITE, hash_val)
 
     for friend in friends_list:
         emails = friend.get('emails')
