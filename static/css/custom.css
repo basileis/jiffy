@@ -18,6 +18,12 @@ html,body{
 
 }
 
+.modal-logo{
+    width:100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
 .headerPosition{
     position:absolute; width: 100%; z-index: 999;
 }
@@ -226,6 +232,12 @@ footer span{
 
 /*margin end*/
 
+/*padding*/
+.padding-bottom0{
+padding-bottom: 0px;
+}
+/*padding end*/
+
 .carousel,
 .item,
 .active {
@@ -237,7 +249,7 @@ footer span{
 }
 
 .carousel-caption{
-    top: 40%;
+    top: 42%;
     text-shadow: none;
     width: 100%;
     left: 0px;

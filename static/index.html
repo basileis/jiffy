@@ -1,67 +1,28 @@
-<!doctype html>
-{% load staticfiles %}
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta name="generator" content=
-            "HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>JiffyNow</title>
-    <link rel="stylesheet" href=
-            "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" type=
-                  "text/css" />
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="css/basic-template.css" type="text/css" />
-    <link rel="stylesheet" href="css/bootstrapValidator.css" type="text/css" />
-    <link rel="stylesheet" href="css/bootstrap-overwrite.css" type="text/css" />
-    <link rel="stylesheet" href="css/custom.css" type="text/css" />
-    <link rel="stylesheet" href="css/font.css" type="text/css" />
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-</head>
 
-<body>
-{% load staticfiles %} <!-- Bootstrap -->
-<script src="https://apis.google.com/js/client.js" type="text/javascript">
-</script><script src=
-                         "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type=
-                         "text/javascript">
-</script><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"
-                 type="text/javascript">
-</script><script src="js/bootstrapValidator.js" type="text/javascript">
-</script>
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-<script type="text/javascript">
-    //<![CDATA[
-
-    function http_post(url, data){
-        var xmlhttp;
-        if (window.XMLHttpRequest)
-        {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {// code for IE6, IE5
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function(){
-            if (xmlhttp.readyState==4 && xmlhttp.status==200){
-                alert(http.responseText);
-                console.logs("Sending post request!");
-            }
-        }
-        xmlhttp.open("POST", "http://jiffynow.in"+url, true);
-        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xmlhttp.send(data);
-    }
-
-    function get_user_data() {
+    <!-- Bootstrap -->
+      <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+      <link rel="stylesheet" href="css/basic-template.css" type="text/css" />
+      <link rel="stylesheet" href="css/bootstrapValidator.css" type="text/css" />
+      <link rel="stylesheet" href="css/bootstrap-overwrite.css" >
+      <link rel="stylesheet" href="css/custom.css" >
+      <link rel="stylesheet" href="css/font.css" >
+      <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>  
+	<script src= "https://apis.google.com/js/client.js" type="text/javascript"></script>
+	<script src="js/bootstrapValidator.js" type="text/javascript"></script>
+	<script>
+   function get_user_data() {
         var data = '';
         var name = document.getElementById("name").value;
         var phone = document.getElementById("phone").value;
@@ -91,9 +52,7 @@
             return false;
         return true;
     }
-    //]]>
-</script><script type="text/javascript">
-//<![CDATA[
+
 $(document).ready(function () {
     var validator = $("#registration-form").bootstrapValidator({
         feedbackIcons: {
@@ -239,6 +198,7 @@ function fetch(token) {
                     email_list += '"'+emails[k] + '",' ;
                 }
                 email_list += email_list.substring(0, email_list.length -1)
+
                 for(var k=0;k<phone.length;k++) {
                     phone_list += '"'+phone[k] + '",';
                 }
@@ -295,73 +255,87 @@ function registerUser(){
 };
 
 </script>
-
-<div class="headerPosition">
-    <div class="width100p hide-767">
+      
+    
+      <section class="hero">
+          
+          <div  class="headerPosition">
+      <div class="width100p hide-767">
         <ul class="social-icon margin-top50px">
-            <li><a href="https://www.facebook.com/pages/Jiffy/729331573803643" class=
-                    "facebook-icon" target="_blank"></a></li>
+                           
+                            <li> <a href="https://www.facebook.com/pages/Jiffy/729331573803643" class="facebook-icon" target="_blank"> </a></li>
+                            <li> <a href="https://twitter.com/thinkjiffy" class="twitter-icon" target="_blank"> </a></li>
+                            <li> <a href="https://plus.google.com/112976258096807027265" class="google-plus-icon" target="_blank"> </a></li>     
+                        </ul>
 
-            <li><a href="https://twitter.com/thinkjiffy" class="twitter-icon" target=
-                    "_blank"></a></li>
+        </div>
+        <header>
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">
+                      <div class="hide-767">
+                  <img src="images/jiffyLogo.png" > 
+                          </div>
+                      <div class="show-767">
+                    <img src="images/jiffyLogo767.png" >
+                          </div>
+                  </a>
+                </div>
 
-            <li><a href="https://plus.google.com/112976258096807027265" class=
-                    "google-plus-icon" target="_blank"></a></li>
-        </ul>
-    </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                    <li><a href="#">T&C </a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#jiffynow">Sign Up</a></li>
 
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
+                   
+                  </ul>
+                 
+                  </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav>
+        </header>
+              </div>
+          
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
 
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle
-        navigation</span></button> <a class="navbar-brand" href="#"></a>
-
-            <div class="hide-767"><img src="images/jiffyLogo.png" /></div>
-
-            <div class="show-767"><img src="images/jiffyLogo767.png" /></div>
-        </div><!-- Collect the nav links, forms, and other content for toggling -->
-
-        <div class="collapse navbar-collapse navbar-right" id=
-                "bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="#">T&amp;C</a></li>
-
-                <li><a href="#">FAQ</a></li>
-
-                <li><a href="#jiffynow">Sign Up</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</div>
-
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-
-    <ol class="carousel-indicators"></ol><!-- Wrapper for slides -->
-
-    <div class="carousel-inner" role="listbox">
-        <div class="item itemBg1 active">
-            <div class="carousel-caption">
-                <div class="width100p">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+   <div class="item itemBg1 active">
+      
+      <div class="carousel-caption">
+      <div class="width100p">
                     <h1 class="color-white">Sign up and experience the power of renting<br />
                         the right home among millions !</h1><a class="btn-orange margin-top30px"
                                                                href="#jiffynow">Jiffy Now</a>
                 </div>
             </div>
         </div>
-
+    
         <div class="item itemBg2">
             <div class="carousel-caption">
                 <div class="width100p">
                     <h1 class="color-white">Your very own special dream home<br />
-                        Just like the French Castle of your dreams !</h1><a class=
-                                                                                    "btn-orange margin-top30px" href="#jiffynow">Jiffy Now</a>
+                        Just like the French Castle of your dreams !</h1><a class= "btn-orange margin-top30px" href="#jiffynow">Jiffy Now</a>
                 </div>
             </div>
         </div>
-
+      
         <div class="item itemBg3">
             <div class="carousel-caption">
                 <div class="width100p">
@@ -372,23 +346,35 @@ function registerUser(){
             </div>
         </div>
     </div><!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" role="button"
-       data-slide="prev"> <span class="sr-only">Previous</span></a> <a class=
-                                                                               "right carousel-control" href="#carousel-example-generic" role="button" data-slide=
-                                                                               "next"> <span class="sr-only">Next</span></a>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-5 hide-767"><img src="images/aboutJiffyImage.png" class=
-                "img-responsive margin-top50px" /></div>
-
-        <div class="col-sm-7">
-            <div class="width100p">
-                <h1 class="color-orange">Jiffy Prelaunch in Pune</h1>
-            </div>
-
-            <div class="width100p color-light-gray">
+      </section>
+      
+      
+      
+    
+      
+    <section class="about-jiffy-bg" id="about-jiffy">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 hide-767">
+                    <img src="images/aboutJiffyImage.png" class="img-responsive margin-top50px">
+                </div>
+                <div class="col-sm-7 ">
+                    <div class="width100p">
+                    <h1 class="color-orange">Jiffy Prelaunch in Pune</h1>
+                    </div>
+                    <div class="width100p color-light-gray">
+                    <p>
                 <p>Jiffy pre-launch registration and invites have started. This is absolutely
                     right moment to get yourself involved with jiffy and fulfill all your immediate
                     or upcoming renting needs. If you help your friend by introducing him/her to
@@ -397,46 +383,44 @@ function registerUser(){
                 <p>Being a jiffy member you will be able to rent-out/rent-in your home with
                     ease. Jiffy consists of team of professionals who know how to help you in
                     finding the right home or tenant for your home.</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 text-center">
-            <h1 class="color-orange">Jiffy Now</h1>
-
-            <p class=" strong-paragraph">Discover great places to live around you.</p>
-        </div>
-    </div>
-
-    <div class="panel-body">
-        <form action="http://jiffynow.in" autocomplete="on" validate="" id=
+    </section>
+    
+    <section id="jiffynow" class="now-jiffy-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h1 class="color-orange">Jiffy Now</h1>
+                    <p class=" strong-paragraph">Discover great places to live around you.</p>
+                </div>
+            </div>
+           <form action="http://jiffynow.in" autocomplete="on" id=
                 "registration-form" method="post">
             <div class="row">
                 <div class="col-sm-3 col-sm-offset-3">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="name" name="name" size="50"
-                               placeholder="Full Name" />
-                    </div>
+                        <input type="text" class="form-control" id="name" name="name" size="50" placeholder="Full Name" />
+                  </div>
                 </div>
-
-                <div class="col-sm-3">
+                <div class="col-sm-3 ">
                     <div class="form-group">
                         <input type="text" class="form-control" id="email" name="email" size="50"
                                placeholder="Email address" />
-                    </div>
+                  </div>
                 </div>
+           
+                
             </div>
-
             <div class="row">
                 <div class="col-sm-12 text-center strong-paragraph15">
-                    Jiffy respects your privacy and hates SPAM calls just as you do.<br />
-                    It is important to verify your identity and keeping your account secure.
+                Jiffy respects your privacy and hates SPAM calls just as you do.
+                  <br>  
+                It is important to verify your identity and keeping your account secure.
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="form-group">
@@ -445,7 +429,6 @@ function registerUser(){
                                        "Phone Number" />
                     </div>
                 </div>
-
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="form-group">
                         <input type="text" class="form-control" id="location" name=
@@ -453,50 +436,61 @@ function registerUser(){
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-12 text-center" id="userType">
                     <div class="radio">
+                      <label>
                         <label><input type="radio" name="optionRadios" id="owner" value="1"
                                       checked /> <span>Owner</span></label>
-                    </div>
-
+                      </label>
+                        </div>
                     <div class="radio">
+                      <label>
                         <label><input type="radio" name="optionRadios" id="tenant" value="2"
                                       checked/> <span>Tenant</span></label>
+                      </label>
                     </div>
-
-                    <div class="radio">
+                    
+                     <div class="radio">
+                      <label>
                         <label><input type="radio" name="optionRadios" id="both" value="3"
                                       checked/> <span>Both</span></label>
+                      </label>
                     </div>
-                </div>
+                
             </div>
+        </div>
+            
     <div class="row">
         <div class="col-sm-12 text-center margin-top20px">
             <a class="btn-orange" data-toggle="modal" data-target="#myModal" onclick="registerUser();">Jiffy Now</a>
-        </div><!-- Modal -->
-    </div>
-    </form>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby=
-            "myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        </div>
+            
+            
+        <!-- Modal -->
+ 
+        </div>
+            </form>
+                   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header text-center">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden=
-                                                                                           "true">X</span><span class="sr-only">Close</span></button>
-
-                    <div class="modal-logo"><img src="images/jiffyLogoOran.png" width=
-                            "100px" /></div>
-
-                    <p class="modal-title padding-bottom0" id="myModalLabel">Want to help your
-                        friends<br />
-                        and Earn Referral Money<br />
-                        up-to <strong class="color-orange">5000/-</strong><br />
-                        Invite them to Jiffy</p>
-                </div>
-
-                <div class="modal-body text-center">
+              <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
+                  
+                  <div class="modal-logo">
+                      <img src="images/jiffyLogoOran.png" width="100px">
+                      </div>
+                <p class="modal-title padding-bottom0" id="myModalLabel">
+                    Want to help your friends 
+                    <br>
+                    and Earn Referral Money
+                    <br>
+                    up-to <strong class="color-orange">5000/-</strong>
+                    <br>
+                    Invite them to Jiffy
+                  </p>
+              </div>
+              <div class="modal-body text-center">
                     <button onclick="auth();" type="button" class="btn btn-lg btn-danger"
                             data-dismiss="modal"><img src="images/googlepluse.svg" width="20px" /> Invite
                         Google Friends!</button><br />
@@ -504,46 +498,41 @@ function registerUser(){
                                <img src="images/facebook.svg" width="20px">
                               Import contacts from Facebook!
                           </button> -->
+              </div>
+             
+            </div>
+          </div>
+        </div>
+    </section>
+      
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="width100p">
+                        <ul >
+                           
+                            <li> <a href="#"> Home</a></li>
+                            <li> <a href="#"> T&C</a></li>
+                            <li> <a href="#"> FAQ</a></li>
+                            <li> <a href="#jiffynow"> Sign Up </a></li>      
+                        </ul>
+                    </div>
+                    <div class="width100p"><span>(C)2015 Jiffynow .in</span></div>
+                </div>
+                <div class="col-sm-4">
+                      <ul class="social-icon">
+                           
+                            <li> <a href="https://www.facebook.com/pages/Jiffy/729331573803643" class="facebook-icon" target="_blank"> </a></li>
+                            <li> <a href="https://twitter.com/thinkjiffy" class="twitter-icon" target="_blank"> </a></li>
+                            <li> <a href="https://plus.google.com/112976258096807027265" class="google-plus-icon" target="_blank"> </a></li>   
+                          
+                          
+                          
+                        </ul>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="width100p">
-                <ul>
-                    <li><a href="#">Home</a></li>
-
-                    <li><a href="#">T&amp;C</a></li>
-
-                    <li><a href="#">FAQ</a></li>
-
-                    <li><a href="#jiffynow">Sign Up</a></li>
-                </ul>
-            </div>
-
-            <div class="width100p">
-                <span>(C)2015 Jiffynow .in</span>
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <ul class="social-icon">
-                <li><a href="https://www.facebook.com/pages/Jiffy/729331573803643" class=
-                        "facebook-icon" target="_blank"></a></li>
-
-                <li><a href="https://twitter.com/thinkjiffy" class="twitter-icon" target=
-                        "_blank"></a></li>
-
-                <li><a href="https://plus.google.com/112976258096807027265" class=
-                        "google-plus-icon" target="_blank"></a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-</div>
-</body>
+    </footer>
+  </body>
 </html>

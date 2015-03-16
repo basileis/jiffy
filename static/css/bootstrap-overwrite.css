@@ -84,8 +84,12 @@
 }
 
 .modal-dialog{
-    width: 350px;
+    width: 326px;
+margin: 100px auto;
+}
 
+.btn-lg, .btn-group-lg > .btn{
+    font-size: 17px;
 }
 @media screen and (max-width: 767px) {
     .navbar-default{
@@ -104,6 +108,8 @@
         text-decoration: underline;
 }
 }
+
+
 
 
 
