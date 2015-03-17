@@ -92,22 +92,13 @@ def send_invite_to_friends(user):
                 raise
 
 if __name__ == '__main__':
-    class JiffyUser(object):
-        """
-        This class will contain all the detail of the user,
-        including all the cross table information
-        """
-        email = ''
-        name = ''
-        phone = ''
-        user_type = ''
-        location = ''
 
-        def __init__(self):
-            pass
+    send_email_('bhupeshpant19jan@gmail.com', 'test', 'this is the content')
+    send_email_('8milelb@gmail.com', 'test', 'this is the content')
 
+    from jiffy_user_info import JiffyUser
     user = JiffyUser()
-    user.email = u'shanupant19@live.com'
+    user.email = u'bhanupant19@live.com'
     user.location = u'wakad'
     user.phone = u'7871277217'
     user.user_type = 2
