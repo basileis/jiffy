@@ -73,6 +73,9 @@
     margin-top: 30px;
 }
 
+.img-responsive{
+    display: inline-block;
+}
 .carousel-control.right{
     background: none;
     z-index: 2;
@@ -84,14 +87,54 @@
 }
 
 .modal-dialog{
-    width: 326px;
+    width: 35%;
 margin: 100px auto;
+    border: none;
 }
 
+.modal-content{
+    background:url(../images/geometry.png) ;
+    border: none;
+    box-shadow: 0 13px 37px rgba(0, 0, 0, 0.52);
+
+}
+
+.modal-backdrop.in{
+    opacity: 0.8;
+    
+}
+
+.modal-header{
+    border: none;
+    padding: 0px;
+    border: none;
+}
+
+.modal-header .close{
+    margin-top: 10px;
+margin-right: 10px;
+}
 .btn-lg, .btn-group-lg > .btn{
     font-size: 17px;
 }
+
+
+.btn-danger{
+    background: #dd4b39;
+}
+
+@media screen and (max-width: 1400px) {
+    
+    .modal-dialog{
+    width: 50%;
+}
+}
+
 @media screen and (max-width: 767px) {
+    .modal-dialog{
+    width: 90%;
+
+}
     .navbar-default{
         background: #e2673a;
         border: none;

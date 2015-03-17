@@ -18,8 +18,8 @@
       <link rel="stylesheet" href="css/custom.css" >
       <link rel="stylesheet" href="css/font.css" >
       <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-  </head>
-  <body>
+      
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>  
@@ -259,6 +259,14 @@ function registerUser(){
 };
 
 </script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
       
     
       <section class="hero">
@@ -349,7 +357,7 @@ function registerUser(){
                 </div>
             </div>
         </div>
-    </div><!-- Controls -->
+    </div>
 
   <!-- Controls -->
   <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -467,7 +475,7 @@ function registerUser(){
             
     <div class="row">
         <div class="col-sm-12 text-center margin-top20px">
-            <a class="btn-orange" data-toggle="modal" data-target="#myModal" onclick="registerUser();">Jiffy Now</a>
+            <a class="btn-orange" data-toggle="modal" data-target="#myModal">Jiffy Now</a>
         </div>
             
             
@@ -482,26 +490,29 @@ function registerUser(){
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
                   
                   <div class="modal-logo">
+                      <div class="width100p">
                       <img src="images/jiffyLogoOran.png" width="100px">
                       </div>
-                <p class="modal-title padding-bottom0" id="myModalLabel">
-                    Want to help your friends 
-                    <br>
+                      <div class="width100p margin-top30px text-center">
+                          <h2 class="color-white">
+                      Want to help your friends 
+                    
                     and Earn Referral Money
-                    <br>
-                    up-to <strong class="color-orange">5000/-</strong>
-                    <br>
+                    
+                        upto 5000/-
+<br>
+                   
                     Invite them to Jiffy
-                  </p>
+                          </h2>
+                      </div>
+                      </div>
+                  
+                
               </div>
               <div class="modal-body text-center">
-                    <button onclick="auth();" type="button" class="btn btn-lg btn-danger"
-                            data-dismiss="modal"><img src="images/googlepluse.svg" width="20px" /> Invite
-                        Google Friends!</button><br />
-                    <!--<button type="button" class="btn btn-lg btn-primary margin-top20px" data-dismiss="modal">
-                               <img src="images/facebook.svg" width="20px">
-                              Import contacts from Facebook!
-                          </button> -->
+                  <a onclick="auth();"><img src="images/gplus.png"  class="img-responsive"></a>
+             <br>
+                  
               </div>
              
             </div>

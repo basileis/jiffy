@@ -20,8 +20,20 @@ html,body{
 
 .modal-logo{
     width:100%;
+    min-height: 300px;
     height: auto;
-    margin-bottom: 20px;
+    padding: 20px;
+    text-align: left;
+
+    background:url(../images/popup.jpg) center no-repeat;
+    background-size: cover;
+    -webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+    
 }
 
 .headerPosition{
