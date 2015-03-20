@@ -97,7 +97,7 @@ def confirm_user(request):
             db_adapter.validate_user(user)
             logs.debug("User [%s] is validated. [email: %s phone: %s]"%\
                 (user.name, user.email, user.phone))
-            #send_email.send_welcome_email(user)
+            send_email.send_welcome_email(user)
             user_validated = True
     if not user_validated:
         logs.info("Confirm User request contains invalid hash! No user is matched")
