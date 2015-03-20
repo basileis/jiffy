@@ -34,10 +34,11 @@ def send_email_(reciever, subject, body):
         raise
 
 def send_welcome_email(user):
-    """Send welcome/email confirmation email to the new registered user"""
+    """Send welcome/email confirmation email to the new registered
+    user those confirmed their email ids"""
     logs.info("Sending welcome email to new user!")
-    templ = get_template('email_invite.html')
-    welcome_email_content = templ.render(Context({'referree_name':user.name}))
+    templ = get_template('welcome_email.html')
+    welcome_email_content = templ.render(Context({'name':user.name}))
     try:
         send_email_(user.email, 'Welcome to Jiffy!', welcome_email_content)
     except Exception as e :
@@ -103,4 +104,7 @@ if __name__ == '__main__':
     user.phone = u'7871277217'
     user.user_type = 2
     user.name= u'shanu'
+    user.friends = ''
     send_confirmation_email(user)
+    send_welcome_email(user)
+    send_invite_to_friends(user)
