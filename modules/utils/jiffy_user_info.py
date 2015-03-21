@@ -26,13 +26,16 @@ class JiffyUser(object):
             except Exception as e:
                 logs.warning("Input params are invalid! [Details: %s]"%str(e))
                 raise
-        if not self.validate():
-            logs.warning("Input params are invalid!")
-            raise Exception("Input params are invalid!")
+            if not self.validate():
+                logs.warning("Input params are invalid!")
+                raise Exception("Input params are invalid!")
 
     def validate(self):
         """Write all validations on input values here!"""
-        return True
+        if not (self.name and self.email and self.phone):
+            return False
+        else:
+            return True
 
     def extract_info(self, json_data):
         """Extract the data from json string"""
@@ -42,3 +45,7 @@ class JiffyUser(object):
         self.friends = json.dumps(json_data.get(u'friends'))
         self.user_type = json_data.get(u'type')
         self.location = json_data.get(u'location')
+        if not self.validate():
+                logs.warning("Input params are invalid!")
+                raise Exception("Input params are invalid!")
+

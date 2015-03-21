@@ -29,7 +29,8 @@ def sign_up_user(request):
     logs.info('/signup/ endpoint is called!')
     try:
         user = JiffyUser(request.DATA)
-        logs.debug('User request came with data.[Name: %s, email: %s, phone: %s]'%(user.name, user.email, user.phone))
+        logs.debug('User request came with data.[Name: %s, email: %s, phone: %s]'\
+                %(user.name, user.email, user.phone))
     except Exception as e:
         logs.warning("Could not create the user!. The inputs are invalid")
         result = dict(success=False)
@@ -112,8 +113,11 @@ def invite_friends(request):
     try:
         data = request.DATA.get(u'invite_data')
         user_data = json.loads(data)
-        user = JiffyUser()
-        user.extract_info(user_data)
+        try:
+            user = JiffyUser()
+            user.extract_info(user_data)
+        except Exception as e:
+            logs.warning("Invite could not be sent to user. User details are invalid")
         save_friends_data(user)
         logs.debug("Friends data is saved!")
         if config.INVITE_FRIENDS:
