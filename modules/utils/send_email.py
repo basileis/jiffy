@@ -34,15 +34,15 @@ def send_email_(reciever, subject, body):
         raise
 
 def send_welcome_email(user):
-    """Send welcome/email confirmation email to the new registered user"""
+    """Send welcome/email confirmation email to the new registered
+    user those confirmed their email ids"""
     logs.info("Sending welcome email to new user!")
-    templ = get_template('email_invite.html')
-    welcome_email_content = templ.render(Context({'referree_name':user.name}))
+    templ = get_template('welcome_email.html')
+    welcome_email_content = templ.render(Context({'name':user.name}))
     try:
         send_email_(user.email, 'Welcome to Jiffy!', welcome_email_content)
     except Exception as e :
         logs.error('Welcome email sending FAILED! [Details: %s]'% str(e))
-        raise
 
 def send_confirmation_email(user):
     """
@@ -60,7 +60,6 @@ def send_confirmation_email(user):
         send_email_(user.email, 'Email Confirmation!', confirmation_email_content)
     except Exception as e :
         logs.error('Welcome email sending FAILED! [Details: %s]'% str(e))
-        raise
 
 def send_info_to_admin(user):
     """Send email to zoho support team about the new registration"""
@@ -72,7 +71,6 @@ def send_info_to_admin(user):
         send_email_(config.JIFFY_SUPPORT_TEAM_2, 'New Registration Notification!', content)
     except Exception as e:
         logs.error('Info sending to ADMIN Failed! [Details: %s]'%str(e))
-        raise
 
 def send_invite_to_friends(user):
     """Send Invite email to friends"""
@@ -89,7 +87,6 @@ def send_invite_to_friends(user):
                 send_email_(email, 'Invited by %s'%user.name, invite_email)
             except Exception as e:
                 logs.error('Invite email sending FAILED! [Details: %s]'% str(e))
-                raise
 
 if __name__ == '__main__':
 
@@ -103,4 +100,7 @@ if __name__ == '__main__':
     user.phone = u'7871277217'
     user.user_type = 2
     user.name= u'shanu'
+    user.friends = ''
     send_confirmation_email(user)
+    send_welcome_email(user)
+    send_invite_to_friends(user)
