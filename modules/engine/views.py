@@ -118,6 +118,8 @@ def invite_friends(request):
             user.extract_info(user_data)
         except Exception as e:
             logs.warning("Invite could not be sent to user. User details are invalid")
+            result = dict(success=False)
+            return HttpResponse(json.dumps(result))
         save_friends_data(user)
         logs.debug("Friends data is saved!")
         if config.INVITE_FRIENDS:
