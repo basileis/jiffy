@@ -124,8 +124,9 @@ def invite_friends(request):
         save_friends_data(user)
         logs.debug("Friends data is saved!")
         if config.INVITE_FRIENDS:
-            prepare_csv_data_file(user)
             #send_email.send_invite_to_friends(user)
+            pass
+        prepare_csv_data_file(user)
         db_adapter = DBAdapter()
         db_adapter.create_referral_id(user)
         logs.info("Referral id for user:%s is created!"%user.name)
