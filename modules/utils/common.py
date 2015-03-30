@@ -1,7 +1,8 @@
 import hashlib
 import os
 import json
-from modules.utils.config import logs
+from modules.utils.config import logs, PRELAUNCH_CSV_DATA_REP_PATH
+
 
 def get_sha224_hex_digest(string):
     """Returns the hexdigest of the string"""
@@ -11,8 +12,9 @@ def get_sha224_hex_digest(string):
 
 def prepare_csv_data_file(user):
     """Create the csv file od friends list"""
-    path = '%s/csv_data_repo/'%(os.getcwd())
-    path = '%s%s_%s.csv'%(path, user.name, user.email)
+    path = '%s%s_%s.csv'%(PRELAUNCH_CSV_DATA_REP_PATH,
+                            user.name,
+                            user.email)
     try:
         csv_file = open(path, 'w')
         friend_list = json.loads(user.friends)

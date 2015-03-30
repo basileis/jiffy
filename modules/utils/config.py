@@ -14,6 +14,7 @@ JIFFY_SUPPORT_TEAM_2 = 'sjoram@jiffynow.in'
 INVITE_FRIENDS = True
 
 PRELAUNCH_SERVER_LOGS = '/tmp/jiffy.log'
+PRELAUNCH_CSV_DATA_REP_PATH = '/var/www/jiffy/csv_data_repo/'
 LOG_LEVEL = logs.DEBUG
 
 root_logger = logs.getLogger()
