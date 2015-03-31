@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from modules.utils import send_email, common, config
 from modules.utils.config import logs
 from modules.utils.jiffy_user_info import JiffyUser
+from modules.utils.common import prepare_csv_data_file
 
 # Default Landing Page loader for Jiffy
 
@@ -51,12 +52,12 @@ def sign_up_user(request):
                     logs.warning('Email cannot be sent. Error info: %s'%str(e))
                 return HttpResponse(json.dumps(result))
             else:
-                logs.warning('User registraction failed!')
+                logs.warning('User Registration Failed!')
                 result = dict(success=False)
                 return HttpResponse(json.dumps(result))
         else:
             logs.warning(
-                'User Registration Railed. User Already Exists! [Details: name = %s, email = %s]'
+                'User Registration Failed. User Already Exists! [Details: name = %s, email = %s]'
                 %(user.name, user.email))
             result = dict(success=False)
             return HttpResponse(json.dumps(result))
@@ -123,7 +124,9 @@ def invite_friends(request):
         save_friends_data(user)
         logs.debug("Friends data is saved!")
         if config.INVITE_FRIENDS:
-            send_email.send_invite_to_friends(user)
+            #send_email.send_invite_to_friends(user)
+            pass
+        prepare_csv_data_file(user)
         db_adapter = DBAdapter()
         db_adapter.create_referral_id(user)
         logs.info("Referral id for user:%s is created!"%user.name)
