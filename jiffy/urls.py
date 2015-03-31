@@ -23,6 +23,6 @@ urlpatterns = patterns('',
     url(r'^confirmUser', views.confirm_user),
     url(r'^invite', views.invite_friends),
     url(r'^referral', views.invited_friends),
-
-
+    url(r'^faq', views.faq),
+    url(r'^t&c', views.terms_and_condition),
 )
