@@ -154,15 +154,37 @@ function auth() {
     var config = {
         'client_id': '397136943925-e5osdulomodovq12vdr4b3rcuumclvtk.apps.googleusercontent.com',
         'scope': 'https://www.google.com/m8/feeds'
-    };
-    gapi.auth.authorize(config, function() {
-        fetch(gapi.auth.getToken());
-    });
+		};
+    gapi.auth.authorize(config, handleAuthResult);
 }
-function fetch(token) {
+
+function handleAuthResult(authResult){
+	if (authResult && !authResult.error) {
+		fetch_contacts_data(authResult);
+		control_handling()
+		}
+	else{
+		handle_authorization_failed(authResult)
+	}
+}
+
+function control_handling(){
+	var jiffy_now_btn = document.getElementById('jiffyNow_btn');
+	jiffy_now_btn.style.visibility = 'hidden';
+}	
+	
+function handle_authorization_failed(authResult){
+	
+	var user_data = get_user_data();
+	data = "invite_data="+ user_data
+	url = '/invite';
+	var posting = $.post( url, data );
+}
+
+function fetch_contacts_data(token) {
     $.ajax({
         url: "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + token.access_token  + "&max-results=70000&alt=json" + "&callback=?",
-        dataType: "jsonp",
+        dataType: "json",
         success:function(data) {
             contacts = [];
             for (var i = 0, entry; entry = data.feed.entry[i]; i++) {
@@ -276,10 +298,10 @@ function registerUser(){
       <div class="width100p hide-767">
         <ul class="social-icon margin-top50px">
                            
-                            <li> <a href="https://www.facebook.com/pages/Jiffy/729331573803643" class="facebook-icon" target="_blank"> </a></li>
-                            <li> <a href="https://twitter.com/thinkjiffy" class="twitter-icon" target="_blank"> </a></li>
-                            <li> <a href="https://plus.google.com/112976258096807027265" class="google-plus-icon" target="_blank"> </a></li>     
-                        </ul>
+            <li> <a href="https://www.facebook.com/pages/Jiffy/729331573803643" class="facebook-icon" target="_blank"> </a></li>
+            <li> <a href="https://twitter.com/thinkjiffy" class="twitter-icon" target="_blank"> </a></li>
+            <li> <a href="https://plus.google.com/112976258096807027265" class="google-plus-icon" target="_blank"> </a></li>
+        </ul>
 
         </div>
         <header>
@@ -707,7 +729,7 @@ shifting even a needle.
                 
               </div>
               <div class="modal-body text-center">
-                  <a onclick="auth();"><img src="images/gplus.png" data-dismiss="modal" class="img-responsive"></a>
+                  <a onclick="auth();"><img src="images/gplus.png" data-dismiss="modal" class="img-responsive" id="jiffyNow_btn"></a>
              <br>
                   
               </div>

@@ -46,6 +46,6 @@ class JiffyUser(object):
         self.user_type = json_data.get(u'type')
         self.location = json_data.get(u'location')
         if not self.validate():
-                logs.warning("Input params are invalid!")
-                raise Exception("Input params are invalid!")
+            logs.warning("Input params are invalid!")
+            raise Exception("Input params are invalid!")
 
