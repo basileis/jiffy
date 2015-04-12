@@ -146,3 +146,17 @@ def save_friends_data(user):
 def invited_friends(request):
     """Takes the interested people to the home page"""
     return open_home_page()
+
+@api_view(['GET'])
+def faq(request):
+    """Send the faq.html response"""
+    templ = get_template('faq.html')
+    html = templ.render(Context())
+    return HttpResponse(html)
+
+@api_view(['GET'])
+def terms_and_condition(request):
+    """Send the t&c.html response"""
+    templ = get_template('t&c.html')
+    html = templ.render(Context())
+    return HttpResponse(html)
