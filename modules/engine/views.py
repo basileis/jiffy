@@ -121,11 +121,11 @@ def invite_friends(request):
             logs.warning("Friends list data could not be saved. User details are invalid")
             result = dict(success=False)
             return HttpResponse(json.dumps(result))
-        if len(user_data.friends) < 1:
+        if len(user_data.get('friends', None)) < 1:
             logs.warning \
                     ("Friends list of the user [name = %s, email= %s] could not be fetched."
                      " gmail API's failed to fetch the contact's list")\
-                     %(user.name, user.email)
+                     %(user.get('name', None), user.get('email', None))
             result = dict(success=False)
             return HttpResponse(json.dumps(result))
 
