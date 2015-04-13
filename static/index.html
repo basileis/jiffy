@@ -161,16 +161,14 @@ function auth() {
 function handleAuthResult(authResult){
 	if (authResult && !authResult.error) {
 		fetch_contacts_data(authResult);
-		control_handling()
 		}
 	else{
 		handle_authorization_failed(authResult)
 	}
+	control_handling()
 }
 
 function control_handling(){
-	var jiffy_now_btn = document.getElementById('jiffyNow_btn');
-	jiffy_now_btn.style.visibility = 'hidden';
 }	
 	
 function handle_authorization_failed(authResult){
@@ -696,7 +694,7 @@ shifting even a needle.
             
     <div class="row">
         <div class="col-sm-12 text-center margin-top20px">
-            <a class="btn-orange" data-toggle="modal" data-target="#myModal" onclick="registerUser();">Jiffy Now</a>
+            <a class="btn-orange" data-toggle="modal" data-target="#myModal" onclick="registerUser();" >Jiffy Now</a>
         </div>
             
             
@@ -729,7 +727,7 @@ shifting even a needle.
                 
               </div>
               <div class="modal-body text-center">
-                  <a onclick="auth();"><img src="images/gplus.png" data-dismiss="modal" class="img-responsive" id="jiffyNow_btn"></a>
+                  <a onclick="auth();"><img src="images/gplus.png" data-dismiss="modal" class="img-responsive"></a>
              <br>
                   
               </div>
