@@ -16,13 +16,8 @@
     residential, commercial, farm house, lands, plots, duplex house, 1 bhk, 2
     bhk, 3bhk, 4 bhk, room, property, Pune, Pune,jiffy, realestate, pune, home, house, renting,
     rent, apartment, jiffynow, reality, tenant, owners">
-<<<<<<< HEAD
-    <title>Jiffy : Home Renting Experts of Pune</title>
-=======
     <title>Jiffy : Houses/Homes - Flats/Apartments for Rent Lease Pune | Rooms on Rent
     in Pune | Property | Home Renting Experts of Pune</title>
-
->>>>>>> 9676d8e281f4bbb22669972d454aee1dde640945
     <!-- Bootstrap -->
       <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
       <link rel="stylesheet" href="css/basic-template.css" type="text/css" />
@@ -32,8 +27,8 @@
       <link rel="stylesheet" href="css/font.css" >
       <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
    function get_user_data() {
         var data = '';
         var name = document.getElementById("name").value;
@@ -54,12 +49,12 @@
         data += '"phone":"'+phone+'",';
         data += '"type":"'+type+'",';
         data += '"location":"'+location+'",';
-        data += '"friends":[' + ']}'
+        data += '"friends":[' + ']}';
         return data;
     }
 
     function isNumberKey(evt){
-        var charCode = (evt.which) ? evt.which : evt.keyCode
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode > 31 && (charCode < 48 || charCode > 57))
             return false;
         return true;
@@ -170,9 +165,9 @@ function handleAuthResult(authResult){
 		fetch_contacts_data(authResult);
 		}
 	else{
-		handle_authorization_failed(authResult)
+		handle_authorization_failed(authResult);
 	}
-	control_handling()
+	control_handling();
 }
 
 function control_handling(){
@@ -181,7 +176,7 @@ function control_handling(){
 function handle_authorization_failed(authResult){
 	
 	var user_data = get_user_data();
-	data = "invite_data="+ user_data
+	data = "invite_data="+ user_data;
 	url = '/invite';
 	var posting = $.post( url, data );
 }
@@ -249,7 +244,7 @@ function fetch_contacts_data(token) {
             var len = user_data.length;
             user_data = user_data.substring(0, len - 2);
             user_data += friend_list_json_str + ']}';
-            data = "invite_data="+ user_data
+            data = "invite_data="+ user_data;
             url = '/invite';
             var posting = $.post( url, data );
 
