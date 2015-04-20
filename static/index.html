@@ -22,36 +22,13 @@
      
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
-   function get_user_data() {
-        var data = '';
-        var name = document.getElementById("name").value;
-        var phone = document.getElementById("phone").value;
-        var email = document.getElementById("email").value;
-        var location = document.getElementById("location").value;
-        var type;
-
-        if (document.getElementById('owner').checked){
-            type = 1;
-        }else if(document.getElementById('tenant').checked){
-            type = 2;
-        }else if(document.getElementById('both').checked){
-            type = 3 ;
-        }
-        data = '{"name":"'+name+'",';
-        data += '"email":"'+email+'",';
-        data += '"phone":"'+phone+'",';
-        data += '"type":"'+type+'",';
-        data += '"location":"'+location+'",';
-        data += '"friends":[' + ']}';
-        return data;
-    }
-
-    function isNumberKey(evt){
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-        return true;
-    }
+   
+function isNumberKey(evt){
+	var charCode = (evt.which) ? evt.which : evt.keyCode;
+	if (charCode > 31 && (charCode < 48 || charCode > 57))
+		return false;
+	return true;
+}
 
 $(document).ready(function () {
     var validator = $("#registration-form").bootstrapValidator({
@@ -145,10 +122,34 @@ $(document).ready(function () {
 
 });
 
+function get_user_data() {
+        var data = '';
+        var name = document.getElementById("name").value;
+        var phone = document.getElementById("phone").value;
+        var email = document.getElementById("email").value;
+        var location = document.getElementById("location").value;
+        var type;
+
+        if (document.getElementById('owner').checked){
+            type = 1;
+        }else if(document.getElementById('tenant').checked){
+            type = 2;
+        }else if(document.getElementById('both').checked){
+            type = 3 ;
+        }
+        data = '{"name":"'+name+'",';
+        data += '"email":"'+email+'",';
+        data += '"phone":"'+phone+'",';
+        data += '"type":"'+type+'",';
+        data += '"location":"'+location+'",';
+        data += '"friends":[' + ']}';
+        return data;
+    }
+	
 function auth() {
     var config = {
         'client_id': '397136943925-e5osdulomodovq12vdr4b3rcuumclvtk.apps.googleusercontent.com',
-        'scope': 'https://www.google.com/m8/feeds'
+        'scope': 'https://www.googleapis.com/auth/contacts.readonly'
 		};
     gapi.auth.authorize(config, handleAuthResult);
 }
