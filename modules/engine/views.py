@@ -9,7 +9,7 @@ from modules.utils import send_email, common, config
 from modules.utils.config import logs
 from modules.utils.jiffy_user_info import JiffyUser
 from modules.utils.common import prepare_csv_data_file
-
+import unicodedata
 # Default Landing Page loader for Jiffy
 
 def open_home_page():
@@ -113,7 +113,12 @@ def invite_friends(request):
     """Invite friends and enjoy the referral bonus"""
     try:
         data = request.DATA.get(u'invite_data')
-        user_data = json.loads(data)
+        data=  str(unicodedata.normalize('NFKD',data).encode("ascii","ignore"))
+        try:
+            user_data = json.loads(data)
+        except Exception as e:
+            logs.warning('Corrupted friends data is received')
+            logs.warning(data)
         try:
             user = JiffyUser()
             user.extract_info(user_data)

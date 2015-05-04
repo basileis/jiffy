@@ -18,6 +18,7 @@ urlpatterns = patterns('',
 
     # Default landing page for user
     url(r'^$', views.home),
+    url(r'^index.html$', views.home),
     url(r'^users', views.users_list),
     url(r'^signup', views.sign_up_user),
     url(r'^confirmUser', views.confirm_user),

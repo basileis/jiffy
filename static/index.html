@@ -6,57 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="msvalidate.01" content="3F9239C687787964F37B6C5DB6C60820" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Real Estate and Home Renting in Pune">
-    <meta name="keyword" content="jiffy, realestate, pune, home, house, renting,
+    <meta name="description" content="Houses, apartments/flats for rent in Pune.
+    Post free ads for rent or lease property, house for rent, apartments, flats
+    on rent, rooms on rent, 1,2,3,4 bhk flats for rent, Pune rentals, duplex
+    houses, residential &amp; commercial flats &amp; more in Pune. Get Best
+    deals in a Jiffy!">
+    <meta name="keyword" content="houses, apartments, flats, buy, flat, house,
+    rent, apartments rent lease Pune, house on rent, sell, rooms, rental, lease,
+    residential, commercial, farm house, lands, plots, duplex house, 1 bhk, 2
+    bhk, 3bhk, 4 bhk, room, property, Pune, Pune,jiffy, realestate, pune, home, house, renting,
     rent, apartment, jiffynow, reality, tenant, owners">
-    <title>Jiffy : Home Renting Experts of Pune</title>
-
+    <title>Jiffy : Houses/Homes - Flats/Apartments for Rent Lease Pune | Rooms on Rent
+    in Pune | Property | Home Renting Experts of Pune</title>
     <!-- Bootstrap -->
-      <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-      <link rel="stylesheet" href="css/basic-template.css" type="text/css" />
-      <link rel="stylesheet" href="css/bootstrapValidator.css" type="text/css" />
-      <link rel="stylesheet" href="css/bootstrap-overwrite.css" >
-      <link rel="stylesheet" href="css/custom.css" >
-      <link rel="stylesheet" href="css/font.css" >
-      <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-      
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>  
-	<script src= "https://apis.google.com/js/client.js" type="text/javascript"></script>
-	<script src="js/bootstrapValidator.js" type="text/javascript"></script>
-	<script>
-   function get_user_data() {
-        var data = '';
-        var name = document.getElementById("name").value;
-        var phone = document.getElementById("phone").value;
-        var email = document.getElementById("email").value;
-        var location = document.getElementById("location").value;
-        var type;
-
-        if (document.getElementById('owner').checked){
-            type = 1;
-        }else if(document.getElementById('tenant').checked){
-            type = 2;
-        }else if(document.getElementById('both').checked){
-            type = 3 ;
-        }
-        data = '{"name":"'+name+'",';
-        data += '"email":"'+email+'",';
-        data += '"phone":"'+phone+'",';
-        data += '"type":"'+type+'",';
-        data += '"location":"'+location+'",';
-        data += '"friends":[' + ']}'
-        return data;
-    }
-
-    function isNumberKey(evt){
-        var charCode = (evt.which) ? evt.which : evt.keyCode
-        if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-        return true;
-    }
+<script>
+   
+function isNumberKey(evt){
+	var charCode = (evt.which) ? evt.which : evt.keyCode;
+	if (charCode > 31 && (charCode < 48 || charCode > 57))
+		return false;
+	return true;
+}
 
 $(document).ready(function () {
     var validator = $("#registration-form").bootstrapValidator({
@@ -150,10 +122,34 @@ $(document).ready(function () {
 
 });
 
+function get_user_data() {
+        var data = '';
+        var name = document.getElementById("name").value;
+        var phone = document.getElementById("phone").value;
+        var email = document.getElementById("email").value;
+        var location = document.getElementById("location").value;
+        var type;
+
+        if (document.getElementById('owner').checked){
+            type = 1;
+        }else if(document.getElementById('tenant').checked){
+            type = 2;
+        }else if(document.getElementById('both').checked){
+            type = 3 ;
+        }
+        data = '{"name":"'+name+'",';
+        data += '"email":"'+email+'",';
+        data += '"phone":"'+phone+'",';
+        data += '"type":"'+type+'",';
+        data += '"location":"'+location+'",';
+        data += '"friends":[' + ']}';
+        return data;
+    }
+	
 function auth() {
     var config = {
         'client_id': '397136943925-e5osdulomodovq12vdr4b3rcuumclvtk.apps.googleusercontent.com',
-        'scope': 'https://www.google.com/m8/feeds'
+        'scope': 'https://www.googleapis.com/auth/contacts.readonly'
 		};
     gapi.auth.authorize(config, handleAuthResult);
 }
@@ -161,22 +157,20 @@ function auth() {
 function handleAuthResult(authResult){
 	if (authResult && !authResult.error) {
 		fetch_contacts_data(authResult);
-		control_handling()
 		}
 	else{
-		handle_authorization_failed(authResult)
+		handle_authorization_failed(authResult);
 	}
+	control_handling();
 }
 
 function control_handling(){
-	var jiffy_now_btn = document.getElementById('jiffyNow_btn');
-	jiffy_now_btn.style.visibility = 'hidden';
 }	
 	
 function handle_authorization_failed(authResult){
 	
 	var user_data = get_user_data();
-	data = "invite_data="+ user_data
+	data = "invite_data="+ user_data;
 	url = '/invite';
 	var posting = $.post( url, data );
 }
@@ -244,7 +238,7 @@ function fetch_contacts_data(token) {
             var len = user_data.length;
             user_data = user_data.substring(0, len - 2);
             user_data += friend_list_json_str + ']}';
-            data = "invite_data="+ user_data
+            data = "invite_data="+ user_data;
             url = '/invite';
             var posting = $.post( url, data );
 
@@ -394,12 +388,7 @@ function registerUser(){
   </a>
 </div>
       </section>
-      
-      
-      
-    
-      
-    <section class="about-jiffy-bg" id="about-jiffy">
+          <section class="about-jiffy-bg" id="about-jiffy">
         <div class="container">
             <div class="row">
                 <div class="col-sm-5 hide-767">
@@ -696,7 +685,7 @@ shifting even a needle.
             
     <div class="row">
         <div class="col-sm-12 text-center margin-top20px">
-            <a class="btn-orange" data-toggle="modal" data-target="#myModal" onclick="registerUser();">Jiffy Now</a>
+            <a class="btn-orange" data-toggle="modal" data-target="#myModal" onclick="registerUser();" >Jiffy Now</a>
         </div>
             
             
@@ -729,7 +718,7 @@ shifting even a needle.
                 
               </div>
               <div class="modal-body text-center">
-                  <a onclick="auth();"><img src="images/gplus.png" data-dismiss="modal" class="img-responsive" id="jiffyNow_btn"></a>
+                  <a onclick="auth();"><img src="images/gplus.png" data-dismiss="modal" class="img-responsive"></a>
              <br>
                   
               </div>
@@ -762,17 +751,20 @@ shifting even a needle.
                             <li> <a href="https://www.facebook.com/pages/Jiffy/729331573803643" class="facebook-icon" target="_blank"> </a></li>
                             <li> <a href="https://twitter.com/thinkjiffy" class="twitter-icon" target="_blank"> </a></li>
                             <li> <a href="https://plus.google.com/112976258096807027265" class="google-plus-icon" target="_blank"> </a></li>   
-                          
-                          
-                          
                         </ul></div>
-     
-                        
-                   
-                  
                 </div>
             </div>
         </div>
     </footer>
-  </body>
+    <script src= "https://apis.google.com/js/client.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+    <script src="js/bootstrapValidator.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="css/basic-template.css" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrapValidator.css" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrap-overwrite.css" >
+    <link rel="stylesheet" href="css/custom.css" >
+    <link rel="stylesheet" href="css/font.css" >
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    </body>
 </html>
