@@ -271,8 +271,9 @@ function parse_gdata(data) {
     url = '/invite';
     var posting = $.post( url, data );
 
-    posting.done(function( response_data ){
-        if (response_data['success'] == true){
+    posting.done(function(response_data){
+        var resp = JSON.parse(response_data);
+        if (resp['success'] == true){
             alert("Invite will be sent to your friends in a jiffy. Thanks!");
         }
         else{
