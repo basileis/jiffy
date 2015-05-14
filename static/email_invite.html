@@ -1,37 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!doctype html>
-{% load staticfiles %}
 <html>
 <head>
 <meta charset="utf-8">
 <title>Invitation for Jiffy Registration</title>
-</head>
+<style type="text/css">
+	@media only screen and (max-width: 480px){
+		table[id=canspamBar] td{
+			font-size:14px !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		table[id=canspamBar] td a{
+			display:block !important;
+			margin-top:10px !important;
+		}
+
+}</style></head>
 <body style="background: none repeat scroll 0 0 #f7f7f7;">
 <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td height="88" align="center" valign="middle"><img src="http://jiffynow.in/images/logo.png"></td>
   </tr>
   <tr>
-    <td height="237" align="center" valign="middle" style="background:url(http://jiffynow.in/images/banner.jpg) no-repeat;  "><span style=" color: #fff; font-family:Verdana, Geneva, sans-serif;
+    <td height="237" align="center" valign="middle"> <img src="http://jiffynow.in/images/banner.jpg"> <strong span style=" color: #e2673a;; font-family:Verdana, Geneva, sans-serif;
     font-size: 27px;
     font-weight: 700;
-    text-shadow: 1px 1px 0 rgba(150, 150, 150, 0.62);">You have been Invited! </span></td>
+    ">You have been Invited! </span></td>
   </tr>
   <tr>
     <td height="105" align="center" valign="middle" bgcolor="#FFFFFF" style="padding-top:30px; padding-bottom:30px;  color: #5d5d5d;
     font-family:Verdana, Geneva, sans-serif;
     font-size: 18px;
   ">All your real estate hassles are taken away <br>
-      by your friend, <span style="color: #e2673a;">	{% autoescape off %}
-				 {{ referree_name }}
-				{% endautoescape %}</span> <br>
+      by your friend, <span style="color: #e2673a;">
+				 <strong> {{Referee_name}} </strong>.
+				 </span> <br>
       <br>
-      {{ referree_name }} gave you <strong style="color: #e2673a;">Rs 1000</strong> off on your first transaction with <br>
+       He gave you <strong style="color: #e2673a;">Rs 1000</strong> off on your first transaction with <br>
       Jiffy and earning Rs 2000 for himself. <br>
       <br>
-      <strong>Be sure to say thanks to  him!</strong></td>
+      <strong>Be sure to say thanks to  him!</strong>
+      <br>
+      <br>
+       <strong span="" style="color: #e2673a;">Don't miss to see our our latest Pre-launch Offers. <br> Visit  <a href="http://www.jiffynow.in/">jiffynow.in</a> now!</strong> 
+  
+      </td>
   </tr>
   <tr>
-    <td align="center" valign="middle" bgcolor="#FFFFFF"><a href="{{ referral_hash }}" style=" background-color: #e16739;
+    <td align="center" valign="middle" bgcolor="#FFFFFF"><a href="http://jiffynow.in/referral?466ae0ef07c62e97183fde76482a6fcb5e18f246e083ddeff1cfcf19" style=" background-color: #e16739;
     border-radius: 3px;
     color: #fff;
     display: block;
@@ -42,7 +59,8 @@
     padding-bottom: 20px;
     padding-top: 20px;
     text-align: center;
-    text-decoration: none;">Claim your Rs.1000 credit</a></td>
+    text-decoration: none;">Claim your Rs.1000 credit</a>
+   </td>
   </tr>
   <tr>
     <td align="center" valign="middle" style=" padding-bottom:10px; padding-top:10px; color: #a7a1a1;
@@ -53,7 +71,7 @@
     text-align: center;">*The discount will be automatically added on your  first transaction with jiffy. <br>
       Registration is easy and only takes a few minutes. <br>
       If you have any questions or concerns, reach out to the Jiffy Support Team by emailing <br>
-      <a href="file:///E:/web/jiffy/email/Email%20Html/Email%20Html/index.html#">connect@jiffynow.in</a></td>
+      <a>connect@jiffynow.in</a></td>
   </tr>
   <tr>
     <td align="center" valign="bottom"><img src="http://jiffynow.in/images/social.png" usemap="#Map"></td>
@@ -64,12 +82,40 @@
 </table>
 <map name="Map">
   <area shape="circle" coords="16,16,14" href="https://www.facebook.com/pages/Jiffy/729331573803643">
-  <area shape="circle" coords="62,16,13" href="https://twitter.com/thinkjiffy" class="twitter-icon">
-  <area shape="circle" coords="110,16,14" href="https://plus.google.com/112976258096807027265">
- <area shape="circle" coords="156,16,13" href="#">
-  <area shape="circle" coords="202,16,13" href="#">
-  <area shape="circle" coords="250,15,14" href="#">
-  <area shape="circle" coords="296,16,14" href="#">
-</map>
-</body>
+  </area><area shape="circle" coords="62,16,13" href="https://twitter.com/thinkjiffy" class="twitter-icon">
+  </area><area shape="circle" coords="110,16,14" href="https://plus.google.com/112976258096807027265">
+ </area><area shape="circle" coords="156,16,13" href="#">
+  </area><area shape="circle" coords="202,16,13" href="#">
+  </area><area shape="circle" coords="250,15,14" href="#">
+  </area><area shape="circle" coords="296,16,14" href="#">
+</area></map>
+            <center>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" id="canspamBarWrapper" style="background-color:#FFFFFF; border-top:1px solid #E5E5E5;">
+                    <tr>
+                        <td align="center" valign="top" style="padding-top:20px; padding-bottom:20px;">
+                            <table border="0" cellpadding="0" cellspacing="0" id="canspamBar">
+                                <tr>
+                                    <td align="center" valign="top" style="color:#606060; font-family:Helvetica, Arial, sans-serif; font-size:11px; line-height:150%; padding-right:20px; padding-bottom:5px; padding-left:20px; text-align:center;">
+                                        This email was sent to <a href="mailto:*|EMAIL|*" target="_blank" style="color:#404040 !important;">*|EMAIL|*</a>
+                                        <br>
+                                        <a href="*|ABOUT_LIST|*" target="_blank" style="color:#404040 !important;"><em>why did I get this?</em></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="*|UNSUB|*" style="color:#404040 !important;">unsubscribe from this list</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="*|UPDATE_PROFILE|*" style="color:#404040 !important;">update subscription preferences</a>
+                                        <br>
+                                        *|LIST:ADDRESSLINE|*
+                                        <br>
+                                        <br>
+                                        *|REWARDS|*
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                
+            </center></body>
 </html>
