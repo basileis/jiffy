@@ -197,7 +197,9 @@ function handlefailure(data){
 }
 
 function fetch_contacts_data(token) {
-	contact_url = "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + token.access_token  + "&max-results=7000&alt=json"
+	contact_url =
+    "https://www.google.com/m8/feeds/contacts/default/full?access_token=" +
+    token.access_token  + "&max-results=7000&alt=json";
 	$.get(contact_url, function(data, status){
 		if (status =='success'){
 			parse_gdata(data)

@@ -1,7 +1,7 @@
 import logging as logs
 
 JIFFY_SUPPORT_EMAIL = "connect@jiffynow.in"
-JIFFY_SUPPORT_EMAIL_PWD = "jiffy_!@34"
+JIFFY_SUPPORT_EMAIL_PWD = "jiffy_12#$"
 JIFFY_WEBSITE = "http://JiffyNow.in"
 JIFFY_EMAIL_SERVER = "smtp.zoho.com"
 JIFFY_EMAIL_PORT = 465
