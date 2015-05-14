@@ -64,7 +64,7 @@ def send_confirmation_email(user):
 def send_info_to_admin(user):
     """Send email to zoho support team about the new registration"""
     logs.info("Sending new user information to Admin!")
-    content = "Congrats a new user is registered! \n Details:- \n Name: [%s], \n Email: [%s], \n Contact No.: [%s], \n Location: [%s]"\
+    content = "Congrats a new user is registered! \n Details:- \n Name: [%s], Type: [%d], \n Email: [%s], \n Contact No.: [%s], \n Location: [%s]"\
                %(user.name, user.user_type, user.email, user.phone, user.location)
     try:
         send_email_(config.JIFFY_SUPPORT_TEAM_1, 'New Registration Notification!', content)
