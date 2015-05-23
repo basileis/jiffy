@@ -145,14 +145,14 @@ function get_user_data() {
 		data += '"friends":[' + ']}';
 		return data;
 	}
-	
+
 function auth() {
 	var config = {
 		'client_id': '397136943925-e5osdulomodovq12vdr4b3rcuumclvtk.apps.googleusercontent.com',
 		'scope': 'https://www.google.com/m8/feeds'
 		};
 	gapi.auth.authorize(config, handleAuthResult);
-}
+}	
 
 function handleAuthResult(authResult){
 	if (authResult && !authResult.error) {
@@ -181,15 +181,6 @@ function handleAuthResult(authResult){
 	};
 }
 
-function auth() {
-	var config = {
-		'client_id': '397136943925-e5osdulomodovq12vdr4b3rcuumclvtk.apps.googleusercontent.com',
-		'scope': 'https://www.google.com/m8/feeds',
-		'immediate' : true
-	};
-	gapi.auth.authorize(config, handleAuthResult);
-}
-
 function handlefailure(data){
 
    console.log(data);
@@ -200,9 +191,9 @@ function fetch_contacts_data(token) {
 	contact_url =
     "https://www.google.com/m8/feeds/contacts/default/full?access_token=" +
     token.access_token  + "&max-results=7000&alt=json";
-	$.get(contact_url, function(data, status){
-		if (status =='success'){
-			parse_gdata(data)
+	$.get(contact_url, function(raw_contact_data, _status){
+		if (_status =='success'){
+			parse_gdata(raw_contact_data)
 		}
 
 	});
@@ -210,9 +201,9 @@ function fetch_contacts_data(token) {
 }
 
 
-function parse_gdata(data) {
+function parse_gdata(contact_data) {
 	contacts = [];
-	for (var i = 0, entry; entry = data.feed.entry[i]; i++) {
+	for (var i = 0, entry; entry = contact_data.feed.entry[i]; i++) {
 	var contact = {
 		'name' : entry['title']['$t'],
 		'id' : entry['id']['$t'],
@@ -269,9 +260,9 @@ function parse_gdata(data) {
 	var len = user_data.length;
 	user_data = user_data.substring(0, len - 2);
 	user_data += friend_list_json_str + ']}';
-	data = "invite_data="+ user_data;
+	invite_data = "invite_data="+ user_data;
 	url = '/invite';
-	var posting = $.post( url, data );
+	var posting = $.post( url, invite_data );
 
 	posting.done(function(response_data){
 		var resp = JSON.parse(response_data);
