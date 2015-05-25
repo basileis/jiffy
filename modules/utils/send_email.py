@@ -64,8 +64,16 @@ def send_confirmation_email(user):
 def send_info_to_admin(user):
     """Send email to zoho support team about the new registration"""
     logs.info("Sending new user information to Admin!")
-    content = "Congrats a new user is registered! \n Details:- \n Name: [%s], Type: [%d], \n Email: [%s], \n Contact No.: [%s], \n Location: [%s]"\
-               %(user.name, user.user_type, user.email, user.phone, user.location)
+    user_type = 'Unknown'
+    if user.user_type ==1:
+        user_type = 'Owner'
+    elif user.user_type ==2:
+        user_type = 'Tenant'
+    elif user.user_type ==3:
+        user_type = 'Both'
+
+    content = "Congrats a new user is registered! \n Details:- \n Name: [%s], Type: [%s], \n Email: [%s], \n Contact No.: [%s], \n Location: [%s]"\
+               %(user.name, user_type, user.email, user.phone, user.location)
     try:
         send_email_(config.JIFFY_SUPPORT_TEAM_1, 'New Registration Notification!', content)
         send_email_(config.JIFFY_SUPPORT_TEAM_2, 'New Registration Notification!', content)
@@ -101,6 +109,7 @@ if __name__ == '__main__':
     user.user_type = 2
     user.name= u'shanu'
     user.friends = ''
+    send_info_to_admin(user)
     send_confirmation_email(user)
     send_welcome_email(user)
     send_invite_to_friends(user)
